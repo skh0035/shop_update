@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View Image</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>Uploaded Image</h1>
+<img th:src="@{/image/view/{id}(id=${imageId})}" alt="Uploaded Image" />
+</body>
+</html>

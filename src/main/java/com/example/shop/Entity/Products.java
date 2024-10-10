@@ -1,5 +1,33 @@
 package com.example.shop.Entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "products")
 public class Products {
-    public String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "prod_id", unique = true)
+    private String prodId;
+
+    @Column(name = "prod_name")
+    private String name;
+
+    @Column(name = "prod_price")
+    private double price;
+    @Column(name = "prod_quant")
+    private int quantity;
+    @Column(name = "image")
+    @Lob
+    private byte[] image;
 }
