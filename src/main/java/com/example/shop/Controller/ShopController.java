@@ -28,33 +28,32 @@ public class ShopController {
 
     @GetMapping("/upload")
     public String showUploadPage() {
-        return "upload";  // Thymeleaf will resolve this to src/main/resources/templates/upload.html
+        return "upload";
     }
 
-    // Handle image upload
+
     @PostMapping("/upload")
     public String uploadImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         shopServices.saveImage(file);
-        // Assuming image ID is 1 for demonstration purposes
-        // You can redirect to the page showing the image, passing the ID of the uploaded image
-        return "redirect:/upload";  // Replace '1' with actual ID from the database if needed
+
+        return "redirect:/upload";
     }
 
-    // Serve the view image page
+
     @GetMapping("/view/{id}")
     public String viewImage(@PathVariable Long id, Model model) {
         model.addAttribute("imageId", id);
-        return "view";  // Thymeleaf will resolve this to src/main/resources/templates/view.html
+        return "view";
     }
 
-    // Return image binary data (for use with <img> tag)
+
     @GetMapping("/view/data/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
         Products image = shopServices.getImageById(id);
 
         if (image != null) {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);  // Set appropriate content type
+            headers.setContentType(MediaType.IMAGE_JPEG);
             return new ResponseEntity<>(image.getImage(), headers, HttpStatus.OK);
         }
 
