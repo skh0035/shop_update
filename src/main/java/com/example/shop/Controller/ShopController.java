@@ -11,10 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,7 +23,7 @@ public class ShopController {
     @Autowired
     private ShopServices shopServices;
 
-    @GetMapping("/upload")
+   /* @GetMapping("/upload")
     public String showUploadPage() {
         return "upload";
     }
@@ -58,5 +55,17 @@ public class ShopController {
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }*/
+    @GetMapping("/AddProducts")
+    public String addProducts(Model model) {
+        model.addAttribute("product", new Products());
+        return "addProducts";
+    }
+
+    @PostMapping("/SAP")
+    public String addProduct(@ModelAttribute("product") Products product, Model model/*,@RequestParam("file") MultipartFile file*/) {
+        shopServices.saveProds(product);
+     //   shopServices.saveImage(file);
+        return "redirect:AddProducts";
     }
 }

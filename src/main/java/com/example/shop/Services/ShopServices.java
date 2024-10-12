@@ -15,7 +15,7 @@ public class ShopServices {
     @Autowired
     private ShopRepository shopRepository;
 
-    public void saveImage(MultipartFile file) throws IOException {
+/*    public void saveImage(MultipartFile file) throws IOException {
         Products image = new Products();
         image.setName(file.getOriginalFilename());
         image.setImage(file.getBytes());
@@ -25,5 +25,9 @@ public class ShopServices {
     public Products getImageById(Long id) {
         Optional<Products> image = shopRepository.findById(id);
         return image.orElse(null);
+    }*/
+
+    public void saveProds(Products products) {
+        shopRepository.save(products);
     }
 }

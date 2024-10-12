@@ -17,9 +17,6 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "prod_id", unique = true)
-    private String prodId;
-
     @Column(name = "prod_name")
     private String name;
 
@@ -27,7 +24,7 @@ public class Products {
     private double price;
     @Column(name = "prod_quant")
     private int quantity;
-    @Column(name = "image")
+ /*   @Column(name = "image")
     @Lob
-    private byte[] image;
+    private byte[] image;*/
 }
