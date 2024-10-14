@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class ShopController {
@@ -67,5 +68,11 @@ public class ShopController {
         shopServices.saveProds(product);
      //   shopServices.saveImage(file);
         return "redirect:AddProducts";
+    }
+    @GetMapping("/admin")
+    public String showProducts( Model model) {
+       List<Products> products = shopServices.getAllProducts();
+        model.addAttribute("products", products);
+        return "admin";
     }
 }

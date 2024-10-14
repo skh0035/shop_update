@@ -4,11 +4,8 @@ import com.example.shop.Entity.Products;
 import com.example.shop.Repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
-import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ShopServices {
@@ -30,4 +27,8 @@ public class ShopServices {
     public void saveProds(Products products) {
         shopRepository.save(products);
     }
+    public List<Products> getAllProducts() {
+        return shopRepository.findAll();
+    }
+
 }
