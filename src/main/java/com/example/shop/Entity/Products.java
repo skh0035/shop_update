@@ -24,7 +24,7 @@ public class Products {
     private double price;
     @Column(name = "prod_quant")
     private int quantity;
- /*   @Column(name = "image")
+    @Column(name = "image")
     @Lob
-    private byte[] image;*/
+    private byte[] image;
 }

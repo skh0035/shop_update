@@ -18,50 +18,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
+@RestController("/product")
 public class ProductController {
     @Autowired
     private ShopRepository shopRepository;
     @Autowired
     private ShopServices shopServices;
 
-    /* @GetMapping("/upload")
-     public String showUploadPage() {
-         return "upload";
-     }
 
-
-     @PostMapping("/upload")
-     public String uploadImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-         shopServices.saveImage(file);
-
-         return "redirect:/upload";
-     }
-
-
-     @GetMapping("/view/{id}")
-     public String viewImage(@PathVariable Long id, Model model) {
-         model.addAttribute("imageId", id);
-         return "view";
-     }
-
-
-     @GetMapping("/view/data/{id}")
-     public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
-         Products image = shopServices.getImageById(id);
-
-         if (image != null) {
-             HttpHeaders headers = new HttpHeaders();
-             headers.setContentType(MediaType.IMAGE_JPEG);
-             return new ResponseEntity<>(image.getImage(), headers, HttpStatus.OK);
-         }
-
-         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-     }*/
     @GetMapping("/AddProducts")
     public String addProducts(Model model) {
         model.addAttribute("product", new Products());
-        return "addProducts";
+        return "product_add";
     }
 
     @PostMapping("/SAP")
