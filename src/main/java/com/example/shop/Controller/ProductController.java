@@ -1,6 +1,7 @@
 package com.example.shop.Controller;
 
 
+
 import com.example.shop.Entity.Products;
 import com.example.shop.Repository.ShopRepository;
 import com.example.shop.Services.ShopServices;
@@ -18,45 +19,45 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-public class ShopController {
+public class ProductController {
     @Autowired
     private ShopRepository shopRepository;
     @Autowired
     private ShopServices shopServices;
 
-   /* @GetMapping("/upload")
-    public String showUploadPage() {
-        return "upload";
-    }
+    /* @GetMapping("/upload")
+     public String showUploadPage() {
+         return "upload";
+     }
 
 
-    @PostMapping("/upload")
-    public String uploadImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-        shopServices.saveImage(file);
+     @PostMapping("/upload")
+     public String uploadImage(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+         shopServices.saveImage(file);
 
-        return "redirect:/upload";
-    }
-
-
-    @GetMapping("/view/{id}")
-    public String viewImage(@PathVariable Long id, Model model) {
-        model.addAttribute("imageId", id);
-        return "view";
-    }
+         return "redirect:/upload";
+     }
 
 
-    @GetMapping("/view/data/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
-        Products image = shopServices.getImageById(id);
+     @GetMapping("/view/{id}")
+     public String viewImage(@PathVariable Long id, Model model) {
+         model.addAttribute("imageId", id);
+         return "view";
+     }
 
-        if (image != null) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(image.getImage(), headers, HttpStatus.OK);
-        }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }*/
+     @GetMapping("/view/data/{id}")
+     public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+         Products image = shopServices.getImageById(id);
+
+         if (image != null) {
+             HttpHeaders headers = new HttpHeaders();
+             headers.setContentType(MediaType.IMAGE_JPEG);
+             return new ResponseEntity<>(image.getImage(), headers, HttpStatus.OK);
+         }
+
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+     }*/
     @GetMapping("/AddProducts")
     public String addProducts(Model model) {
         model.addAttribute("product", new Products());
@@ -66,13 +67,17 @@ public class ShopController {
     @PostMapping("/SAP")
     public String addProduct(@ModelAttribute("product") Products product, Model model/*,@RequestParam("file") MultipartFile file*/) {
         shopServices.saveProds(product);
-     //   shopServices.saveImage(file);
+        //   shopServices.saveImage(file);
         return "redirect:AddProducts";
     }
     @GetMapping("/admin")
     public String showProducts( Model model) {
-       List<Products> products = shopServices.getAllProducts();
+        List<Products> products = shopServices.getAllProducts();
         model.addAttribute("products", products);
         return "admin";
     }
+
+
+
 }
+
