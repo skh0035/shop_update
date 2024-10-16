@@ -18,12 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@RestController("/product")
+@RestController
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ShopRepository shopRepository;
     @Autowired
     private ShopServices shopServices;
+
 
 
     @GetMapping("/AddProducts")
@@ -43,6 +45,12 @@ public class ProductController {
         List<Products> products = shopServices.getAllProducts();
         model.addAttribute("products", products);
         return "admin";
+    }
+
+    @PostMapping("/save")
+    public String saveProduct(@ModelAttribute("product") Products products){
+        shopServices.saveProds(products);
+        return "redirect:product_add";
     }
 
 

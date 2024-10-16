@@ -8,19 +8,19 @@
 <header>
     <h1>Add a product</h1>
 </header>
-<form action="product.save" method="POST" enctype="multipart/form-data">
+<form th:action="@{product/save}" th:object="${product}" method="POST" enctype="multipart/form-data">
 
     <label for="name">Product Name</label>
-    <input type="text" name="name" id="name" placeholder="name" required/>
+    <input type="text" name="name" id="name" th:field="*{name}" placeholder="name" required/>
 
     <label for="quant">Product Quantity</label>
-    <input type="text" name="quant" id="quant" placeholder="quantity" required/>
+    <input type="text" name="quant" id="quant" th:field="*{quantity}" placeholder="quantity" required/>
 
     <label for="price">Product price</label>
-    <input type="text" name="price" id="price" placeholder="price" required/>
+    <input type="text" name="price" id="price" th:field="*{price}" placeholder="price" required/>
 
     <label for="image">Product Image</label>
-    <input type="file" name="image" id="image" required/>
+    <input type="file" name="image" id="image" th:field="*{image}" required/>
 
 
 

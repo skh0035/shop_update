@@ -36,12 +36,5 @@ public class ShopServices {
         return shopRepository.findAll();
     }
 
-    public void UpdateProds(Products products){
-        prodRepo.UpdateByProdId(products.getId());
-    }
-
-    public void DeleteProds(Products products){
-    prodRepo.DeleteByProdId(products.getId());
-    }
 
 }
