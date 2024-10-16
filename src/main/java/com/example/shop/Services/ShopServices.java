@@ -5,7 +5,9 @@ import com.example.shop.Repository.ProdRepo;
 import com.example.shop.Repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -15,13 +17,13 @@ public class ShopServices {
     @Autowired
     private ProdRepo prodRepo;
 
-/*    public void saveImage(MultipartFile file) throws IOException {
+  /*  public void saveImage(MultipartFile file) throws IOException {
         Products image = new Products();
         image.setName(file.getOriginalFilename());
         image.setImage(file.getBytes());
         shopRepository.save(image);
-    }
-
+    }*/
+/*
     public Products getImageById(Long id) {
         Optional<Products> image = shopRepository.findById(id);
         return image.orElse(null);

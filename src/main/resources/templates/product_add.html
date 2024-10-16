@@ -8,7 +8,7 @@
 <header>
     <h1>Add a product</h1>
 </header>
-<form th:action="@{product/save}" th:object="${product}" method="POST" enctype="multipart/form-data">
+<form th:action="@{save}" th:object="${product}" method="POST" enctype="multipart/form-data">
 
     <label for="name">Product Name</label>
     <input type="text" name="name" id="name" th:field="*{name}" placeholder="name" required/>
@@ -22,7 +22,7 @@
     <label for="image">Product Image</label>
     <input type="file" name="image" id="image" th:field="*{image}" required/>
 
-
+<button type="submit">Submit</button>
 
     
 </form>
