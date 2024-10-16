@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="../css/admin/style.css">
+</head>
+<body>
+  <center>
+  <div class="title">
+    <h2>Admin</h2>
+    <div class="buttons">
+      <a href=""><button>Add</button></a>
+      <a href=""><button>Edit</button></a>
+    </div>
+  </div>
+</center>
+  <div class="tables">
+    <div class="user-table">
+      <table border="2px">
+        <tr><td>№</td>
+          <td>Username</td>
+          <td>Password</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Name1</td>
+          <td>Password1</td>
+        </tr>
+      </table>
+    </div>
+    <div class="products">
+      <table border="2px">
+        <tr >
+          <td>Id</td>
+          <td>Product name</td>
+          <td>Product price</td>
+          <td>product quantity</td>
+          <td>product image</td>
+        </tr>
+        <tr th:each="pro: ${prod_id}">
+          <td th:text="${pro.name}"></td>
+          <td th:text="${pro.price}"></td>
+          <td th:text="${pro.quantity}"></td>
+        <td><img th:src="${pro.image}" alt=""></td>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
