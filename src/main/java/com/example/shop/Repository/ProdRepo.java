@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdRepo extends JpaRepository<Products, Long> {
-    Products UpdateByProdId(Long id);
-    Products DeleteByProdId(Long id);
+
 }

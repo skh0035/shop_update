@@ -1,7 +1,4 @@
 package com.example.shop.Controller;
-
-
-
 import com.example.shop.Entity.Products;
 import com.example.shop.Repository.ShopRepository;
 import com.example.shop.Services.ShopServices;
@@ -36,7 +33,7 @@ public class ProductController {
 
     @PostMapping("/SAP")
     public String addProduct(@ModelAttribute("product") Products product, Model model/*,@RequestParam("file") MultipartFile file*/) {
-        shopServices.saveProds(product);
+        shopServices.saveProd(product);
         //   shopServices.saveImage(file);
         return "redirect:AddProducts";
     }
@@ -49,11 +46,12 @@ public class ProductController {
 
     @PostMapping("/save")
     public String saveProduct(@ModelAttribute("product") Products products){
-        shopServices.saveProds(products);
-        return "redirect:product_add";
+        shopServices.saveProd(products);
+        return "product_add";
     }
-
-
-
+    @GetMapping("/add")
+    public String AddProduct(Model model){
+        model.addAttribute("product", new Products());
+        return "product_add";
+    }
 }
-

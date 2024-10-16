@@ -26,13 +26,11 @@ public class ShopServices {
         Optional<Products> image = shopRepository.findById(id);
         return image.orElse(null);
     }*/
-
-    public void saveProds(Products products) {
-
+    public void saveProd(Products products){
         shopRepository.save(products);
     }
-    public List<Products> getAllProducts() {
 
+    public List<Products> getAllProducts() {
         return shopRepository.findAll();
     }
 
