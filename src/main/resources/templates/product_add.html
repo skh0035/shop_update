@@ -8,6 +8,10 @@
 <header>
     <h1>Add a product</h1>
 </header>
+<div class="buttons">
+    <a th:href="@{/product/admin}"><button>Admin page</button></a>
+
+</div>
 <form th:action="@{save}" th:object="${product}" method="POST" enctype="multipart/form-data">
 
     <label for="name">Product Name</label>
@@ -22,7 +26,7 @@
     <label for="image">Product Image</label>
     <input type="file" name="image" id="image" th:field="*{image}" required/>
 
-<button type="submit">Submit</button>
+<button type="submit">Save</button>
 
     
 </form>

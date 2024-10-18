@@ -11,7 +11,7 @@
   <div class="title">
     <h2>Admin</h2>
     <div class="buttons">
-      <a href=""><button>Add</button></a>
+      <a th:href="@{/product/add}"><button>Add</button></a>
       <a href=""><button>Edit</button></a>
     </div>
   </div>
@@ -38,12 +38,20 @@
           <td>Product price</td>
           <td>product quantity</td>
           <td>product image</td>
+          <td>features</td>
         </tr>
-        <tr th:each="pro: ${prod_id}">
-          <td th:text="${pro.name}"></td>
-          <td th:text="${pro.price}"></td>
-          <td th:text="${pro.quantity}"></td>
-        <td><img th:src="${pro.image}" alt=""></td>
+        <tr th:each="product: ${pro}">
+          <td th:text="${product.id}"></td>
+          <td th:text="${product.name}"></td>
+          <td th:text="'$' + ${product.price}"></td>
+          <td th:text="${product.quantity}"></td>
+          <td>      <img style="width: 100px; height: 50px;"
+                         th:src="@{'/product/'+${product.id}}"
+                         th:alt="${product.name}" alt="Image"></td>
+        <td>
+          <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
+          <button>Update</button></td>
+
       </table>
     </div>
   </div>

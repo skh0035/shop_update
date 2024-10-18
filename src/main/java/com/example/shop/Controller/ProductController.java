@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,11 +80,48 @@ public class ProductController {
     @GetMapping("/show")
     public String showAllPro(Model model){
 
-
-        model.addAttribute("pro", prodService.findAllPro());
+        List<Products> prod = prodService.findAllPro();
+        model.addAttribute("pro", prod);
 
         return "control";
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<byte[]> getImageByProductId(@PathVariable long id){
+        Products product = prodService.getProdByid(id);
+        byte[] image = product.getImage();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/*")
+                .body(image);
+
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteByProdId(@PathVariable Long id){
+        prodService.deleteByProdId(id);
+        return "redirect:/product/show";
+    }
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Products product = prodService.getProductById(id);
+        model.addAttribute("product", product);
+        return "Update";  // This refers to the edit-product.html file
+    }
+
+    // Handle form submission for updating a product
+    @PostMapping("/edit/{id}")
+    public String updateProduct(
+            @PathVariable Long id,
+            @ModelAttribute Products product,
+            RedirectAttributes redirectAttributes) {
+
+        prodService.updateProduct(id, product);
+        redirectAttributes.addFlashAttribute("message", "Product updated successfully!");
+        return "redirect:/products/edit/" + id;
+    }
+
+
 
 }
 

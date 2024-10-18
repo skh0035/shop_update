@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
   <meta charset="UTF-8">
   <title>Add Product</title>
@@ -8,6 +8,8 @@
 <header>
   <h1>Add a Product</h1>
 </header>
+
+<a th:href="@{/product/show}"> <button>Admin page</button></a>
 <form action="/product/save" method="post" enctype="multipart/form-data">
   <label for="name">Product name</label>
   <input id="name" name="name" placeholder="Product name" required>
