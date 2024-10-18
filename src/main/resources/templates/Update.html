@@ -6,7 +6,7 @@
 <body>
 
 <h1>Edit Product</h1>
-<form th:action="@{/products/edit/{id}(id=${product.id})}" th:object="${product}" method="post">
+<form th:action="@{/product/postEdit/{id}(id=${product.id})}" th:object="${product}" method="post">
     <label for="name" th:text="'Name: ' + ${product.name}"></label>
     <input type="text" id="name" th:field="*{name}" required />
 

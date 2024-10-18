@@ -1,31 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../css/admin/style.css">
 </head>
 <body>
-<div>
-    <form>
-        <label for="">
-            Product name
-        </label>
-        <input type="text" required/>
+<center>
+    <div class="title">
+        <h2>Admin</h2>
+        <div class="buttons">
+            <a th:href="@{/product/add}"><button>Add</button></a>
+            <a href=""><button>Edit</button></a>
+        </div>
+    </div>
+</center>
+<div class="tables">
+    <div class="user-table">
+        <table border="2px">
+            <tr><td>№</td>
+                <td>Username</td>
+                <td>Password</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Name1</td>
+                <td>Password1</td>
+            </tr>
+        </table>
+    </div>
+    <div class="products">
+        <table border="2px">
+            <tr >
+                <td>Id</td>
+                <td>Product name</td>
+                <td>Product price</td>
+                <td>product quantity</td>
+                <td>product image</td>
+                <td>features</td>
+            </tr>
+            <tr th:each="product: ${pro}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="'$' + ${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td>      <img style="width: 100px; height: 50px;"
+                               th:src="@{'/product/'+${product.id}}"
+                               th:alt="${product.name}" alt="Image"></td>
+                <td>
+                    <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
+                    <button>Update</button></td>
 
-        <label for="">
-            Product price
-        </label>
-        <input type="number" name="price" id="price" required/>
-        <label for="">
-            Product quantity
-        </label>
-        <input type="number" name="quantity" id="quantity" required/>
-
-        <label for="">
-            Product image
-        </label>
-        <input type="file" name="" id="">
-    </form>
+        </table>
+    </div>
 </div>
 </body>
 </html>

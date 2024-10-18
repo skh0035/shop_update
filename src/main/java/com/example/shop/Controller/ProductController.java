@@ -83,7 +83,7 @@ public class ProductController {
         List<Products> prod = prodService.findAllPro();
         model.addAttribute("pro", prod);
 
-        return "control";
+        return "admin";
     }
 
     @GetMapping("/{id}")
@@ -110,15 +110,15 @@ public class ProductController {
     }
 
     // Handle form submission for updating a product
-    @PostMapping("/edit/{id}")
+    @PostMapping("/postEdit/{id}")
     public String updateProduct(
             @PathVariable Long id,
             @ModelAttribute Products product,
             RedirectAttributes redirectAttributes) {
 
         prodService.updateProduct(id, product);
-        redirectAttributes.addFlashAttribute("message", "Product updated successfully!");
-        return "redirect:/products/edit/" + id;
+       // redirectAttributes.addFlashAttribute("message", "Product updated successfully!");
+        return "redirect:/product/show";
     }
 
 
