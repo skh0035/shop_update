@@ -3,63 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link rel="stylesheet" href="../css/admin/style.css">
-</head>
-<body bgcolor="#696969">
-<center>
-    <div class="title">
-        <h2>Admin</h2>
-        <div class="buttons">
-            <a th:href="@{/product/add}"><button>Add</button></a>
-        </div>
-    </div>
-</center>
-<div class="tables">
-    <div class="user-table">
-        <table border="2px">
-            <tr><td>№</td>
-                <td>Username</td>
-                <td>Password</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Name1</td>
-                <td>Password1</td>
-            </tr>
-        </table>
-    </div>
-    <div class="products">
-        <form action="#" th:action="@{/product/sortByPrice}" method="get">
-            <select name="order" th:value="${order}">
-                <option value="price_high_to_low">Price High to Low</option>
-                <option value="low_to_high">Low to High</option>
-            </select>
-            <button type="submit">Sort</button>
-        </form>
-        <table border="2px">
-            <tr >
-                <td>Id</td>
-                <td>Product name</td>
-                <td>Product price</td>
-                <td>product quantity</td>
-                <td>product image</td>
-                <td>features</td>
-            </tr>
-            <tr th:each="product: ${products}">
-                <td th:text="${product.id}"></td>
-                <td th:text="${product.name}"></td>
-                <td th:text="'$' + ${product.price}"></td>
-                <td th:text="${product.quantity}"></td>
-                <td>      <img style="width: 100px; height: 50px;"
-                               th:src="@{'/product/'+${product.id}}"
-                               th:alt="${product.name}" alt="Image"></td>
-                <td>
-                    <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
-                    <form th:action="@{/product/edit/{id}(id=${product.id})}"><button type="submit">Edit</button></form></td>
+    <title>Admin Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-        </table>
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar/Nav */
+        nav {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        nav h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057;
+        }
+
+        nav .logout {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+        }
+
+        main h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Admin Dashboard</h2>
+    <ul>
+        <li><a href="product_page">Products</a></li>
+        <li><a href="#sales">Sales</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#clients">Clients</a></li>
+    </ul>
+    <div class="logout">
+        <a href="#" style="color: red;">Logout</a>
     </div>
-</div>
+</nav>
+
+<main>
+    <h1>Welcome to Admin Panel</h1>
+
+    <div id="products" class="card">
+        <h3>Products</h3>
+        <p>Manage your product listings here. Add, update, or remove products.</p>
+    </div>
+
+    <div id="sales" class="card">
+        <h3>Sales</h3>
+        <p>View your sales performance and analyze trends.</p>
+    </div>
+
+    <div id="orders" class="card">
+        <h3>Orders</h3>
+        <p>Track customer orders and manage their statuses.</p>
+    </div>
+
+    <div id="clients" class="card">
+        <h3>Clients</h3>
+        <p>Manage your clients and their details.</p>
+    </div>
+</main>
+
 </body>
 </html>

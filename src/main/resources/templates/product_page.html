@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../css/admin/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        /* Sidebar/Nav */
+        nav {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        nav h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057;
+        }
+
+        nav .logout {
+            margin-top: auto;
+            text-align: center;
+
+        }
+        main {
+            flex-grow: 1;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <h2><a href="admin">Admin Dashboard</a></h2>
+    <ul>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#sales">Sales</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#clients">Clients</a></li>
+    </ul>
+    <div class="logout">
+        <a href="#" style="color: red;">Logout</a>
+    </div>
+</nav>
+<center>
+    <div class="main">
+
+
+    </div>
+</center>
+<div class="tables">
+    <div class="products">
+        <form action="#" th:action="@{/product/sortByPrice}" method="get">
+            <select name="order" th:value="${order}">
+                <option value="price_high_to_low">Price High to Low</option>
+                <option value="low_to_high">Low to High</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+        <table border="2px">
+            <tr >
+                <td>Id</td>
+                <td>Product name</td>
+                <td>Product price</td>
+                <td>product quantity</td>
+                <td>product image</td>
+                <td>features</td>
+            </tr>
+            <tr th:each="product: ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="'$' + ${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td>      <img style="width: 100px; height: 50px;"
+                               th:src="@{'/product/'+${product.id}}"
+                               th:alt="${product.name}" alt="Image"></td>
+                <td>
+                    <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
+                    <form th:action="@{/product/edit/{id}(id=${product.id})}"><button type="submit">Update</button></form></td>
+
+        </table>
+        <div class="button">
+            <a th:href="@{/product/add}"><button>Add</button></a>
+            <a href=""><button>Edit</button></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

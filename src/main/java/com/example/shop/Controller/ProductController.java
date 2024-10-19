@@ -45,10 +45,14 @@ public class ProductController {
         prodService.saveAllProd(pr, image);
         return "redirect:/product/add";
     }
-    @GetMapping("/admin")
+    @GetMapping("/product_page")
     public String showProducts( Model model) {
         List<Products> products = prodService.getAllProducts();
         model.addAttribute("products", products);
+        return "product_page";
+    }
+    @GetMapping("/admin")
+    public String AdminPage(){
         return "admin";
     }
 
@@ -89,7 +93,7 @@ public class ProductController {
         List<Products> products = prodService.getProducts(order);
         model.addAttribute("products", products);
         model.addAttribute("order", order);
-        return "admin";
+        return "product_page";
     }
 }
 
