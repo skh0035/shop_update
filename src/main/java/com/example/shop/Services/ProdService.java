@@ -46,11 +46,20 @@ public class ProdService {
     public List<Products> getAllProducts() {
         return productRepository.findAll();
     }
-    public List<Products> getProducts(String order) {
-        if ("price_high_to_low".equals(order)) {
-            return productRepository.findAllByOrderByPriceDesc();
-        } else {
-            return productRepository.findAllByOrderByPriceAsc();
+    public List<Products> sortProducts(String order) {
+        switch (order) {
+            case "price_high_to_low":
+                return productRepository.findAllByOrderByPriceDesc();
+            case "price_low_to_high":
+                return productRepository.findAllByOrderByPriceAsc();
+            case "name_asc":
+                return productRepository.findAllByOrderByNameAsc();
+            case "name_desc":
+                return productRepository.findAllByOrderByNameDesc();
+            default:
+                // Return products in ascending price order by default
+                return productRepository.findAllByOrderByPriceAsc();
         }
     }
+
 }

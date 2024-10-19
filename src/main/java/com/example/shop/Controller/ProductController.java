@@ -2,13 +2,10 @@ package com.example.shop.Controller;
 
 import com.example.shop.Entity.Products;
 import com.example.shop.Repository.ProductRepository;
-import com.example.shop.Repository.ShopRepository;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.ShopServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +67,7 @@ public class ProductController {
     @GetMapping("/delete/{id}")
     public String deleteByProdId(@PathVariable Long id){
         prodService.deleteByProdId(id);
-        return "redirect:/product/show";
+        return "redirect:/product/product_page";
     }
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -85,12 +82,14 @@ public class ProductController {
             @ModelAttribute Products product,
             RedirectAttributes redirectAttributes) {
         prodService.updateProduct(id, product);
-        return "redirect:/product/admin";
+        return "redirect:/product/product_page";
     }
 
     @GetMapping("/sortByPrice")
-    public String getProducts(@RequestParam(value = "order", defaultValue = "low_to_high") String order, Model model) {
-        List<Products> products = prodService.getProducts(order);
+    public String sortProducts(
+            @RequestParam(value = "order", defaultValue = "price_low_to_high") String order,
+            Model model) {
+        List<Products> products = prodService.sortProducts(order);
         model.addAttribute("products", products);
         model.addAttribute("order", order);
         return "product_page";
