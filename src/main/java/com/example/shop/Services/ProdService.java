@@ -15,22 +15,12 @@ public class ProdService {
     @Autowired
     private ProductRepository productRepository;
 
-
-
     public void saveAllProd(Products pr, MultipartFile image) throws IOException {
         byte [] images = image.getBytes();
         pr.setImage(images);
         pr.setImageType(image.getContentType());
-
-
         productRepository.save(pr)    ;
     }
-
-    public List<Products> findAllPro(){
-
-        return productRepository.findAll();
-    }
-
 
     public Products getProdByid(Long id){
         return productRepository.findById(id).orElse(null);
@@ -41,10 +31,9 @@ public class ProdService {
         productRepository.deleteById(id);
     }
 
-
     public Products getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElse(null);
     }
 
     public void updateProduct(Long id, Products updatedProduct) {
@@ -52,9 +41,16 @@ public class ProdService {
         existingProduct.setName(updatedProduct.getName());
         existingProduct.setPrice(updatedProduct.getPrice());
         existingProduct.setQuantity(updatedProduct.getQuantity());
-//        existingProduct.setImage(updatedProduct.getImage());
         productRepository.save(existingProduct);
     }
-
-
+    public List<Products> getAllProducts() {
+        return productRepository.findAll();
+    }
+    public List<Products> getProducts(String order) {
+        if ("price_high_to_low".equals(order)) {
+            return productRepository.findAllByOrderByPriceDesc();
+        } else {
+            return productRepository.findAllByOrderByPriceAsc();
+        }
+    }
 }

@@ -20,9 +20,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
-
-
     @Column(name = "category_name")
     private String c_name;
-    //hi sarvar
 }

@@ -3,18 +3,18 @@
 <head>
     <title>Edit Product</title>
 </head>
-<body>
+<body bgcolor="#696969">
 
 <h1>Edit Product</h1>
 <form th:action="@{/product/postEdit/{id}(id=${product.id})}" th:object="${product}" method="post">
-    <label for="name" th:text="'Name: ' + ${product.name}"></label>
+    <label for="name" th:text="'Name:'"></label>
     <input type="text" id="name" th:field="*{name}" required />
 
-    <label for="quantity" th:text="'quantity: ' + ${product.quantity}"></label>
+    <label for="quantity" th:text="'Quantity:'"></label>
     <input type="number" id="quantity" th:field="*{quantity}" required />
 
 
-    <label for="price" th:text="'Price: ' + ${product.price}"></label>
+    <label for="price" th:text="'Price: '"></label>
     <input type="number" id="price" th:field="*{price}" step="0.01" required />
 
     <button type="submit">Update Product</button>

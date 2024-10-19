@@ -6,13 +6,12 @@
     <title>Admin</title>
     <link rel="stylesheet" href="../css/admin/style.css">
 </head>
-<body>
+<body bgcolor="#696969">
 <center>
     <div class="title">
         <h2>Admin</h2>
         <div class="buttons">
             <a th:href="@{/product/add}"><button>Add</button></a>
-            <a href=""><button>Edit</button></a>
         </div>
     </div>
 </center>
@@ -31,6 +30,13 @@
         </table>
     </div>
     <div class="products">
+        <form action="#" th:action="@{/product/sortByPrice}" method="get">
+            <select name="order" th:value="${order}">
+                <option value="price_high_to_low">Price High to Low</option>
+                <option value="low_to_high">Low to High</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
         <table border="2px">
             <tr >
                 <td>Id</td>
@@ -40,7 +46,7 @@
                 <td>product image</td>
                 <td>features</td>
             </tr>
-            <tr th:each="product: ${pro}">
+            <tr th:each="product: ${products}">
                 <td th:text="${product.id}"></td>
                 <td th:text="${product.name}"></td>
                 <td th:text="'$' + ${product.price}"></td>
@@ -50,7 +56,7 @@
                                th:alt="${product.name}" alt="Image"></td>
                 <td>
                     <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
-                    <button>Update</button></td>
+                    <form th:action="@{/product/edit/{id}(id=${product.id})}"><button type="submit">Edit</button></form></td>
 
         </table>
     </div>
