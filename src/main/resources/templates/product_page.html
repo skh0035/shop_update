@@ -99,20 +99,21 @@
 </center>
 <div class="tables">
     <div class="products">
-        <form action="#" th:action="@{/product/sortByPrice}" method="get">
+        <form action="#" th:action="@{/product/sortBy}" method="get">
             <select name="order" th:value="${order}">
                 <option value="price_high_to_low">Price High to Low</option>
                 <option value="low_to_high">Low to High</option>
                 <option value="name_asc">From A-Z</option>
                 <option value="name_desc">From Z-A</option>
-
-
             </select>
             <button type="submit">Sort</button>
         </form>
-        <select name="category" th:action="@{/getCategory}" method="get">
+        <form>
+            <select th:each="categories: ${categories}">
+                <option th:text="${categories.c_name}"></option>
+            </select>
+        </form>
 
-        </select>
         <table border="2px">
             <tr >
                 <td>Id</td>

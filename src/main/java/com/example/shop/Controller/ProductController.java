@@ -47,6 +47,8 @@ public class ProductController {
     public String showProducts( Model model) {
         List<Products> products = prodService.getAllProducts();
         model.addAttribute("products", products);
+        List<Category> categories = prodService.getAllCategories();
+        model.addAttribute("categories", categories);
         return "product_page";
     }
     @GetMapping("/admin")
