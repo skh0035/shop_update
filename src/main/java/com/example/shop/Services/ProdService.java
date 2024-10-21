@@ -1,6 +1,8 @@
 package com.example.shop.Services;
 
+import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
+import com.example.shop.Repository.CategoryRepository;
 import com.example.shop.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class ProdService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     public void saveAllProd(Products pr, MultipartFile image) throws IOException {
         byte [] images = image.getBytes();
@@ -22,10 +27,7 @@ public class ProdService {
         productRepository.save(pr)    ;
     }
 
-    public Products getProdByid(Long id){
-        return productRepository.findById(id).orElse(null);
 
-    }
 
     public void deleteByProdId(Long id){
         productRepository.deleteById(id);
@@ -61,5 +63,11 @@ public class ProdService {
                 return productRepository.findAllByOrderByPriceAsc();
         }
     }
+public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+}
+public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+}
 
 }

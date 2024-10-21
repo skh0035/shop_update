@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+  <h1>Add Category</h1>
+</header>
+<div class="buttons">
+  <a th:href="@{/product/admin}"><button>Admin page</button></a>
+
+</div>
+<form th:action="@{saveCategory}" th:object="${category}" method="POST">
+
+  <label for="name">Category Name</label>
+  <input type="text" name="name" id="name" th:field="*{c_name}" placeholder="name" required/>
+
+  <button type="submit">Save</button>
+
+
+</form>
+</body>
+</html>

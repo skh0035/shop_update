@@ -1,5 +1,6 @@
 package com.example.shop.Controller;
 
+import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
 import com.example.shop.Repository.ProductRepository;
 import com.example.shop.Services.ProdService;
@@ -55,7 +56,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable long id){
-        Products product = prodService.getProdByid(id);
+        Products product = prodService.getProductById(id);
         byte[] image = product.getImage();
 
         return ResponseEntity.ok()
@@ -85,7 +86,7 @@ public class ProductController {
         return "redirect:/product/product_page";
     }
 
-    @GetMapping("/sortByPrice")
+    @GetMapping("/sortBy")
     public String sortProducts(
             @RequestParam(value = "order", defaultValue = "price_low_to_high") String order,
             Model model) {
@@ -94,5 +95,8 @@ public class ProductController {
         model.addAttribute("order", order);
         return "product_page";
     }
+
+
+
 }
 
