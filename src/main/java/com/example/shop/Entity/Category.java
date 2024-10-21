@@ -21,5 +21,10 @@ public class Category {
     private long Id;
 
     @Column(name = "category_name")
-    private String c_name;
+    private String c_name
+            ;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Products products;
 }

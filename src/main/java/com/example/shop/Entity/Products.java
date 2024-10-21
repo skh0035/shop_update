@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +28,9 @@ public class Products {
     @Column(name = "prod_quant")
     private int quantity;
 
+    @Column(name = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Category> categories;
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;

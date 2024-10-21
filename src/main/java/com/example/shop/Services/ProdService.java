@@ -24,7 +24,7 @@ public class ProdService {
         byte [] images = image.getBytes();
         pr.setImage(images);
         pr.setImageType(image.getContentType());
-        productRepository.save(pr)    ;
+        productRepository.save(pr);
     }
 
 

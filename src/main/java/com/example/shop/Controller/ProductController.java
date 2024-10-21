@@ -29,6 +29,8 @@ public class ProductController {
     @GetMapping("/add")
     public String addProducts(Model model) {
         model.addAttribute("product", new Products());
+        List<Category> categories = prodService.getAllCategories();
+        model.addAttribute("categories", categories);
         return "product_add";
     }
 
@@ -47,8 +49,6 @@ public class ProductController {
     public String showProducts( Model model) {
         List<Products> products = prodService.getAllProducts();
         model.addAttribute("products", products);
-        List<Category> categories = prodService.getAllCategories();
-        model.addAttribute("categories", categories);
         return "product_page";
     }
     @GetMapping("/admin")
