@@ -113,17 +113,19 @@
         <table border="2px">
             <tr >
                 <td>Id</td>
-                <td>Product name</td>
-                <td>Product price</td>
-                <td>product quantity</td>
-                <td>product image</td>
-                <td>features</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Category</td>
+                <td>Image</td>
+                <td>Features</td>
             </tr>
             <tr th:each="product: ${products}">
                 <td th:text="${product.id}"></td>
                 <td th:text="${product.name}"></td>
                 <td th:text="'$' + ${product.price}"></td>
                 <td th:text="${product.quantity}"></td>
+                <td th:text="${product.category.getC_name()}"></td>
                 <td>      <img style="width: 100px; height: 50px;"
                                th:src="@{'/product/'+${product.id}}"
                                th:alt="${product.name}" alt="Image"></td>

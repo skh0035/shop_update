@@ -28,12 +28,14 @@ public class Products {
     @Column(name = "prod_quant")
     private int quantity;
 
-    @Column(name = "category")
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Category> categories;
+
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
     @Column(name = "image_type")
     private String imageType;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }

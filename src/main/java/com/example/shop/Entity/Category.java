@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,10 +24,8 @@ public class Category {
     private long Id;
 
     @Column(name = "category_name")
-    private String c_name
-            ;
+    private String c_name;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Products products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<Products> products;
 }

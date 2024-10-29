@@ -29,18 +29,19 @@ public class ProductController {
     @GetMapping("/add")
     public String addProducts(Model model) {
         model.addAttribute("product", new Products());
-        List<Category> categories = prodService.getAllCategories();
-        model.addAttribute("categories", categories);
+        model.addAttribute("category", prodService.getAllCategories());
         return "product_add";
     }
 
     @PostMapping("/save")
-    public String saveProd(@RequestParam("name") String name,  @RequestParam("quantity") int quantity,
+    public String saveProd(@RequestParam("name") String name,  @RequestParam("quantity") int quantity,@RequestParam("category") Category category,
                            @RequestParam("price") double price , @RequestParam("image") MultipartFile image) throws IOException {
+
         Products pr = new Products();
         pr.setName(name);
         pr.setPrice(price);
         pr.setQuantity(quantity);
+        pr.setCategory(category);
         pr.setImageType(image.getContentType());
         prodService.saveAllProd(pr, image);
         return "redirect:/product/add";

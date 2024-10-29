@@ -22,11 +22,16 @@
 
     <label for="price">Product price</label>
     <input type="text" name="price" id="price" th:field="*{price}" placeholder="price" required/>
-    <form th:action="@{/product/add}" method="get">
+    <label for="category">Category</label>
+   <select id="category" name="category">
+       <option value="" disabled>Select category for product</option>
+       <option th:each="category :${category}" th:value="${category.Id}" th:text="${category.c_name}"></option>
+   </select>
+   <!-- <form th:action="@{/product/add}" method="get">
         <select th:each="categories: ${categories}">
             <option th:text="${categories.c_name}"></option>
         </select>
-    </form>
+    </form>-->
     <label for="image">Product Image</label>
     <input type="file" name="image" id="image" th:field="*{image}" required/>
 
