@@ -17,4 +17,5 @@ public class ClientController {
         model.addAttribute("products", clientService.GetProd());
         return "/products";
     }
+    //trh'lyjpoyj
 }
