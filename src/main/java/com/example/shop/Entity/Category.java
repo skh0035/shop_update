@@ -28,4 +28,6 @@ public class Category {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Products> products;
+
+    //shodiyooooor
 }
