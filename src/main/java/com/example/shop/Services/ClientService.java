@@ -13,7 +13,6 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     public List<Products> GetProd(){
-      return  clientRepository.findAll();
-
+        return  clientRepository.findAll();
     }
 }

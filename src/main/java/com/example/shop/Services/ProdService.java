@@ -72,5 +72,8 @@ public List<Category> getAllCategories() {
 public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElse(null);
 }
+public List<Products> getProductByCategoryId(Long categoryId) {
+        return  productRepository.findAllByCategoryId(categoryId);
+}
 
 }
