@@ -2,17 +2,16 @@ package com.example.shop.Controller;
 
 import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
+import com.example.shop.Entity.Purchase;
 import com.example.shop.Services.ClientService;
 import com.example.shop.Services.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/client")
@@ -56,5 +55,11 @@ public class ClientController {
         List<Products>  products = clientService.getProductsByCategory(categoryId);
         model.addAttribute("product_kids", products);
         return "products_kids";
+    }
+
+
+    @PostMapping("/{purchaseId}/add-products")
+    public Purchase addProductsToPurchase(@PathVariable Long purchaseId, @RequestBody Set<Long> productIds) {
+        return clientService.addProductsToPurchase(purchaseId, productIds);
     }
 }
