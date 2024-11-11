@@ -141,7 +141,7 @@
                             <a href="javascript:;">Sahifalar</a>
                             <ul>
                                 <li><a href="about.html">Biz haqimizda</a></li>
-                                <li><a th:href="@{/client/product}">Mahsulotlar</a></li>
+                                <li><a th:href="@{/client/products}">Mahsulotlar</a></li>
                                 <li><a href="contact.html">Bog‘lanish</a></li>
                             </ul>
                         </li>
@@ -173,7 +173,7 @@
 
     <div class="product-details">
         <h4 th:text="${cart.product.name}"></h4>
-        <p th:text="${cart.product.price}"></p>
+        <h4 th:text="${cart.product.price*cart.quantity+'$'}"></h4>
 
         <div class="quantity-control">
             <button class="decrease-btn" onclick="decreaseQuantity(this)">−</button>
@@ -183,7 +183,7 @@
     </div>
 
 
-    <button class="remove-btn">Remove</button>
+    <form th:action="@{/cart/delete/{id}(id=${cart.id})}"><button class="remove-btn">Remove</button></form>
 
 </div>
 

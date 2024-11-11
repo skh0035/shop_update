@@ -38,4 +38,7 @@ public class CartService {
         cartRepository.deleteAll();
     }
 
+    public void deleteById(Long id) {
+        cartRepository.deleteById(id);
+    }
 }

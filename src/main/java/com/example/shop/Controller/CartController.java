@@ -36,4 +36,10 @@ public class CartController {
         cartService.deleteAll();
         return "redirect:/cart/hi";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteByProdId(@PathVariable Long id){
+        cartService.deleteById(id);
+        return "redirect:/cart/hi";
+    }
 }

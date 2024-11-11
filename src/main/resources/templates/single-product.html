@@ -143,17 +143,19 @@ Sure! Here’s the translated visible text in Uzbek:
                         <div class="right-content">
 
                             <div class="quantity buttons_added">
-                                <input type="button" value="-" class="minus">
-                                <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
-                                <input type="button" value="+" class="plus">
+                                <input type="button" value="-" class="minus" id="decrement">
+                                <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="quantity">
+                                <input type="button" value="+" class="plus" id="increment">
                             </div>
 
                         </div>
                     </div>
-                    <div class="total">
-                        <h4>Jami: $210.00</h4>
-                        <div class="main-border-button"><button type="submit">Savatchaga qo'shish</button></div>
-                    </div>
+                        <div class="total">
+                            <h4 th:text="${'Price:'+single_prod.price}+'$'"></h4>
+                            <div class="main-border-button">
+                                <button type="submit">Savatchaga qo'shish</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

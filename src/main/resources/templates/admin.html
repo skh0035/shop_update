@@ -91,10 +91,11 @@
 <nav>
     <h2>Admin Dashboard</h2>
     <ul>
-        <li><a href="product_page">Products</a></li>
+        <li><a th:href="@{/product/product_page}">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
         <li><a href="#clients">Clients</a></li>
+        <li><a th:href="@{/client/products}">Client Products</a></li>
     </ul>
     <div class="logout">
         <a href="#" style="color: red;">Logout</a>
