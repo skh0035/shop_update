@@ -2,7 +2,7 @@ package com.example.shop.Controller;
 
 import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
-import com.example.shop.Entity.Purchase;
+
 import com.example.shop.Services.ClientService;
 import com.example.shop.Services.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +58,5 @@ public class ClientController {
     }
 
 
-    @PostMapping("/{purchaseId}/add-products")
-    public Purchase addProductsToPurchase(@PathVariable Long purchaseId, @RequestBody Set<Long> productIds) {
-        return clientService.addProductsToPurchase(purchaseId, productIds);
-    }
+
 }

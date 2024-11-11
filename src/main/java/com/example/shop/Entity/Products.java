@@ -40,6 +40,5 @@ public class Products {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToMany(mappedBy = "products")
-    private Set<Purchase> purchases;
+
 }
