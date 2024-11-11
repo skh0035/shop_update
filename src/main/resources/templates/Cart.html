@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uz" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Hexashop - Mahsulotlar Ro‘yxati</title>
+
+    <!-- Qo‘shimcha CSS fayllari -->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+    <style>
+        /* Container Styling */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 110px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Image Styling */
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        /* Product Details */
+        .product-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .product-price {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        /* Quantity Control */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .decrease-btn,
+        .increase-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .decrease-btn:hover,
+        .increase-btn:hover {
+            background-color: #ddd;
+        }
+
+        .quantity {
+            margin: 0 10px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Remove Button */
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #e60000;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ***** Yuklanish ekrani boshlanishi ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Yuklanish ekrani tugashi ***** -->
+
+<!-- ***** Header Soha Boshlanishi ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Boshlanishi ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/assets/images/logo.png">
+                    </a>
+                    <!-- ***** Logo Tugashi ***** -->
+                    <!-- ***** Menyu Boshlanishi ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="index.html" class="active">Asosiy</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/client/product_men/1}">Erkaklar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/client/product_women/2}">Ayollar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/client/product_kids/3}">Bolalar</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Sahifalar</a>
+                            <ul>
+                                <li><a href="about.html">Biz haqimizda</a></li>
+                                <li><a th:href="@{/client/product}">Mahsulotlar</a></li>
+                                <li><a href="contact.html">Bog‘lanish</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:;">Xususiyatlar</a>
+                            <ul>
+                                <li><a href="#">1-sahifa</a></li>
+                                <li><a href="#">2-sahifa</a></li>
+                                <li><a href="#">3-sahifa</a></li>
+                                <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">4-sahifa</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="index.html">Kashf qiling</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menyu</span>
+                    </a>
+                    <!-- ***** Menyu Tugashi ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Soha Tugashi ***** -->
+
+
+<div class="cart-item" th:each="cart : ${cart}">
+    <img style="width: 150px; height: 150px" th:src="@{'/product/' + ${cart.product.id}}" th:alt="${cart.product.name}">
+
+    <div class="product-details">
+        <h4 th:text="${cart.product.name}"></h4>
+        <p th:text="${cart.product.price}"></p>
+
+        <div class="quantity-control">
+            <button class="decrease-btn" onclick="decreaseQuantity(this)">−</button>
+            <span class="quantity" th:text="${cart.quantity}"></span>
+            <button class="increase-btn" onclick="increaseQuantity(this)">+</button>
+        </div>
+    </div>
+
+
+    <button class="remove-btn">Remove</button>
+
+</div>
+
+
+<!-- ***** Footer Boshlanishi ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="/assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, AQSH</a></li>
+                        <li><a href="#">hexashop@company.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Savdo va Kategoriyalar</h4>
+                <ul>
+                    <li><a href="#">Erkaklar savdosi</a></li>
+                    <li><a href="#">Ayollar savdosi</a></li>
+                    <li><a href="#">Bolalar savdosi</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Foydali havolalar</h4>
+                <ul>
+                    <li><a href="#">Bosh sahifa</a></li>
+                    <li><a href="#">Biz haqimizda</a></li>
+                    <li><a href="#">Yordam</a></li>
+                    <li><a href="#">Aloqa</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Yordam va Ma’lumotlar</h4>
+                <ul>
+                    <li><a href="#">Yordam</a></li>
+                    <li><a href="#">Tez-tez so‘raladigan savollar</a></li>
+                    <li><a href="#">Yetkazib berish</a></li>
+                    <li><a href="#">Kuzatish ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Mualliflik huquqi © 2022 HexaShop Co., Ltd. Barcha huquqlar himoyalangan.
+                        <br>Dizayn: <a href="https://templatemo.com" target="_parent" title="bepul css shablonlari">TemplateMo</a></p>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+
+<!-- Plugins -->
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/assets/js/accordions.js}"></script>
+<script th:src="@{/assets/js/datepicker.js}"></script>
+<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+<script th:src="@{/assets/js/waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/assets/js/imgfix.min.js}"></script>
+<script th:src="@{/assets/js/slick.js}"></script>
+<script th:src="@{/assets/js/lightbox.js}"></script>
+<script th:src="@{/assets/js/isotope.js}"></script>
+
+<!-- Global Init -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<script>
+
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function(){
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("."+selectedClass).fadeOut();
+            setTimeout(function() {
+                $("."+selectedClass).fadeIn();
+                $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+        });
+    });
+    function increaseQuantity(button) {
+        const quantityElement = button.previousElementSibling;
+        let quantity = parseInt(quantityElement.textContent, 10);
+        quantity++;
+        quantityElement.textContent = quantity;
+    }
+
+    function decreaseQuantity(button) {
+        const quantityElement = button.nextElementSibling;
+        let quantity = parseInt(quantityElement.textContent, 10);
+        if (quantity > 1) {
+            quantity--;
+            quantityElement.textContent = quantity;
+        }
+    }
+
+</script>
+
+</body>
+
+</html>

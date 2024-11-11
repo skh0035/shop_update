@@ -22,16 +22,12 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "quantity")
+    private int quantity;
+/*
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
-    private User user;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartItems;
+    private User user;*/
 
-    private Double totalAmount;
-
-
-
-    public void calculateTotalAmount() {
-        totalAmount = cartItems.stream().mapToDouble(CartItem::getSubtotal).sum();
-    }
+    @ManyToOne
+    private Products product;
 }
