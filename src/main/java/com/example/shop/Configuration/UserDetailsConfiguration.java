@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDetailsConfiguration implements UserDetails {
     private User user;
 
-    public UserDetailsConfiguration(User user) {
+    public UserDetailsConfiguration() {
         this.user = user;
     }
 

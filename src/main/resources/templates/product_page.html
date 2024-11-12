@@ -80,7 +80,7 @@
 </head>
 <body>
 <nav>
-    <h2><a href="admin">Admin Dashboard</a></h2>
+    <h2><a th:href="@{/product/admin}">Admin Dashboard</a></h2>
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
@@ -136,10 +136,10 @@
                     <form th:action="@{/product/edit/{id}(id=${product.id})}"><button type="submit">Update</button></form></td>
 
         </table>
-        <div class="button">
-            <a th:href="@{/product/add}"><button>Add</button></a>
+<!--        <div class="button">-->
+<!--            <a th:href="@{/product/add}"><button>Add</button></a>-->
 
-        </div>
+<!--        </div>-->
     </div>
 </div>
 </body>
