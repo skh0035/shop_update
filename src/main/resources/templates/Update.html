@@ -100,7 +100,7 @@
 </center>
 
 
-<h1>Edit Product</h1>
+<h4>Edit Product</h4>
 <form th:action="@{/product/postEdit/{id}(id=${product.id})}" th:object="${product}" method="post">
     <label for="name" th:text="'Name:'"></label>
     <input type="text" id="name" th:field="*{name}" required />

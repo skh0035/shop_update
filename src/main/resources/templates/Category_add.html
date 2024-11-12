@@ -2,16 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        /* Sidebar/Nav */
+        nav {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        nav h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 22px;
+
+
+        }
+        nav h2 a{
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 22px;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057;
+        }
+
+        nav .logout {
+            margin-top: auto;
+            text-align: center;
+
+        }
+        main {
+            flex-grow: 1;
+            padding: 40px;
+        }
+    </style>
 </head>
-<body>
+<body bgcolor="#696969">
+<nav>
+    <h2><a href="admin">Admin Dashboard</a></h2>
+    <ul>
+        <li><a href="#sales">Sales</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a th:href="@{/client/products}">Client Products</a></li>
+    </ul>
+    <div class="logout">
+        <a href="#" style="color: red;">Logout</a>
+    </div>
+</nav>
+<center>
+    <div class="main">
+
+
+    </div>
+</center>
 <header>
   <h1>Add Category</h1>
 </header>
-<div class="buttons">
-  <a th:href="@{/product/admin}"><button>Admin page</button></a>
+<!--<div class="buttons">-->
+<!--  <a th:href="@{/product/admin}"><button>Admin page</button></a>-->
 
-</div>
+<!--</div>-->
 <form th:action="@{saveCategory}" th:object="${category}" method="POST">
 
   <label for="name">Category Name</label>
