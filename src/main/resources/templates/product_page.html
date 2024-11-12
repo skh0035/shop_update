@@ -82,10 +82,12 @@
 <nav>
     <h2><a href="admin">Admin Dashboard</a></h2>
     <ul>
-        <li><a href="#products">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
         <li><a href="#clients">Clients</a></li>
+        <li><a th:href="@{/client/products}">Client Products</a></li>
+        <li><a th:href="@{/addCategory}">Add Category</a></li>
+        <li><a th:href="@{/product/add}">Add Product</a></li>
     </ul>
     <div class="logout">
         <a href="#" style="color: red;">Logout</a>
@@ -136,7 +138,7 @@
         </table>
         <div class="button">
             <a th:href="@{/product/add}"><button>Add</button></a>
-            <a href=""><button>Edit</button></a>
+
         </div>
     </div>
 </div>
