@@ -28,5 +28,6 @@ public class User {
     @JoinColumn(name = "cart", nullable = false)
     private Cart cart;
 
-
+    @Column(name = "role", nullable = false)
+    private String role;
 }

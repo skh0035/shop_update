@@ -20,7 +20,7 @@ public class CartController {
     private UserService userService;
     @Autowired
     ProdService prodService;
-    @GetMapping("/hi")
+    @GetMapping("/cart")
     public String viewCart(Model model) {
         model.addAttribute("cart", cartService.getCartItems());
         return "Cart";
@@ -42,4 +42,6 @@ public class CartController {
         cartService.deleteById(id);
         return "redirect:/cart/hi";
     }
+
+
 }
