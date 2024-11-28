@@ -10,14 +10,12 @@
 
     <title>Hexashop - Mahsulotlar Ro‘yxati</title>
 
-    <!-- Qo‘shimcha CSS fayllari -->
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
     <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
     <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
     <style>
-        /* Container Styling */
         .cart-item {
             display: flex;
             align-items: center;
@@ -27,8 +25,6 @@
             border-bottom: 1px solid #ddd;
             transition: background-color 0.3s ease;
         }
-
-        /* Image Styling */
         .product-image {
             width: 80px;
             height: 80px;
@@ -37,7 +33,6 @@
             margin-right: 15px;
         }
 
-        /* Product Details */
         .product-details {
             flex: 1;
             display: flex;
@@ -56,7 +51,6 @@
             margin: 5px 0;
         }
 
-        /* Quantity Control */
         .quantity-control {
             display: flex;
             align-items: center;
@@ -89,7 +83,6 @@
             color: #333;
         }
 
-        /* Remove Button */
         .remove-btn {
             background-color: #ff4d4d;
             color: #fff;
@@ -99,6 +92,20 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: background-color 0.3s;
+        }
+        .order-btn {
+            background-color: dimgrey;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: black;
         }
 
         .remove-btn:hover {
@@ -110,7 +117,6 @@
 
 <body>
 
-<!-- ***** Yuklanish ekrani boshlanishi ***** -->
 <div id="preloader">
     <div class="jumper">
         <div></div>
@@ -118,20 +124,16 @@
         <div></div>
     </div>
 </div>
-<!-- ***** Yuklanish ekrani tugashi ***** -->
-
-<!-- ***** Header Soha Boshlanishi ***** -->
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Boshlanishi ***** -->
+
                     <a href="index.html" class="logo">
                         <img src="/assets/images/logo.png">
                     </a>
-                    <!-- ***** Logo Tugashi ***** -->
-                    <!-- ***** Menyu Boshlanishi ***** -->
+
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.html" class="active">Asosiy</a></li>
                         <li class="scroll-to-section"><a th:href="@{/client/product_men/1}">Erkaklar</a></li>
@@ -185,6 +187,11 @@
 
     <form th:action="@{/cart/delete/{id}(id=${cart.id})}"><button class="remove-btn">Remove</button></form>
 
+
+</div>
+
+<div>
+    <form><button class="order-btn">Order</button></form>
 </div>
 
 

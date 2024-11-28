@@ -29,18 +29,18 @@ public class CartController {
     @GetMapping("/add/{productId}")
     public String addToCart(@PathVariable Long productId, @RequestParam int quantity) {
         cartService.addToCart(productId, quantity);
-        return "redirect:/cart/hi";
+        return "redirect:/cart/cart";
     }
     @GetMapping("/delete")
     public String deleteProduct() {
         cartService.deleteAll();
-        return "redirect:/cart/hi";
+        return "redirect:/cart/cart";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteByProdId(@PathVariable Long id){
         cartService.deleteById(id);
-        return "redirect:/cart/hi";
+        return "redirect:/cart/cart";
     }
 
 
