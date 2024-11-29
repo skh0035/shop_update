@@ -17,8 +17,9 @@
             display: flex;
             min-height: 100vh;
             background-color: #f4f4f4;
+            font-size: 16px;
         }
-        /* Sidebar/Nav */
+
         nav {
             width: 250px;
             background-color: #343a40;
@@ -27,22 +28,23 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
         nav h2 {
             margin-bottom: 30px;
             text-align: center;
             font-size: 22px;
-
-
         }
-        nav h2 a{
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 22px;
+
+        nav h2 a {
             text-decoration: none;
             color: white;
-            display: block;
+            transition: color 0.3s;
+        }
+
+        nav h2 a:hover {
+            color: #f1c40f;
         }
 
         nav ul {
@@ -60,21 +62,114 @@
             display: block;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav ul li a:hover {
             background-color: #495057;
+            transform: translateX(10px);
         }
 
         nav .logout {
             margin-top: auto;
             text-align: center;
+        }
 
+        nav .logout a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid red;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav .logout a:hover {
+            background-color: red;
+            color: white;
         }
         main {
             flex-grow: 1;
             padding: 40px;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        form input,
+        form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        form input[type="file"] {
+            padding: 0;
+            background-color: transparent;
+        }
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+
+        form input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+
+        #file-chosen {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+            display: block;
         }
     </style>
 </head>
@@ -84,7 +179,7 @@
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="#clients">Clients</a></li>
+        <li><a th:href="@{client/showUser}">Users</a></li>
         <li><a th:href="@{/client/products}">Client Products</a></li>
         <li><a th:href="@{/addCategory}">Add Category</a></li>
     </ul>
@@ -92,38 +187,45 @@
         <a href="#" style="color: red;">Logout</a>
     </div>
 </nav>
-<center>
-    <div class="main">
+
+<main>
+    <form th:action="@{save}" th:object="${product}" method="POST" enctype="multipart/form-data">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" th:field="*{name}" placeholder="Enter product name" required/>
+
+        <label for="quant">Product Quantity</label>
+        <input type="number" name="quant" id="quant" th:field="*{quantity}" placeholder="Enter quantity" required/>
+
+        <label for="price">Product Price</label>
+        <input type="number" step="0.01" name="price" id="price" th:field="*{price}" placeholder="Enter price" required/>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="" disabled selected>Select category for product</option>
+            <option th:each="category :${category}" th:value="${category.Id}" th:text="${category.c_name}"></option>
+        </select>
+
+            <!-- Other form fields -->
+
+            <label for="image">Product Image</label>
+            <label for="image" class="custom-file-upload">Choose Image</label>
+            <input type="file" name="image" id="image" th:field="*{image}" required onchange="updateFileName()"/>
+            <span id="file-chosen">No file chosen</span>
+
+            <button type="submit">Save</button>
+        </form>
+
+        <script>
+            function updateFileName() {
+                const fileInput = document.getElementById('image');
+                const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file chosen";
+                document.getElementById('file-chosen').textContent = fileName;
+            }
+        </script>
 
 
-    </div>
-</center>
-<form th:action="@{save}" th:object="${product}" method="POST" enctype="multipart/form-data">
-
-    <label for="name">Product Name</label>
-    <input type="text" name="name" id="name" th:field="*{name}" placeholder="name" required/>
-
-    <label for="quant">Product Quantity</label>
-    <input type="text" name="quant" id="quant" th:field="*{quantity}" placeholder="quantity" required/>
-
-    <label for="price">Product price</label>
-    <input type="text" name="price" id="price" th:field="*{price}" placeholder="price" required/>
-    <label for="category">Category</label>
-    <select id="category" name="category">
-        <option value="" disabled>Select category for product</option>
-        <option th:each="category :${category}" th:value="${category.Id}" th:text="${category.c_name}"></option>
-    </select>
-    <!-- <form th:action="@{/product/add}" method="get">
-         <select th:each="categories: ${categories}">
-             <option th:text="${categories.c_name}"></option>
-         </select>
-     </form>-->
-    <label for="image">Product Image</label>
-    <input type="file" name="image" id="image" th:field="*{image}" required/>
-
-    <button type="submit">Save</button>
 
 
-</form>
+</main>
 </body>
 </html>
