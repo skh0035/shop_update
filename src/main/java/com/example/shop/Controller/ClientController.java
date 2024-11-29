@@ -26,6 +26,8 @@ public class ClientController {
     private ProdService prodService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
     @GetMapping("/products")
     public String GetProds(Model model) {
         model.addAttribute("products", clientService.GetProd());
@@ -71,8 +73,16 @@ public class ClientController {
 
     @PostMapping("/saveUser")
     public String saveUser(User user){
+        user.setRole("USER");
      userRepository.save(user);
         return "redirect:/client/addUser";
+    }
+
+    @GetMapping("/getUser")
+    public String getUser(Model model){
+        List<User> users = userService.findAll();
+        model.addAttribute("user", users);
+        return "user_show";
     }
 
 

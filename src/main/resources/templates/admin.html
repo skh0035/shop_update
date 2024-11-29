@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
         }
 
         body {
             display: flex;
             min-height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
+            color: #212529;
         }
 
-        /* Sidebar/Nav */
         nav {
             width: 250px;
             background-color: #343a40;
@@ -28,12 +27,23 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
         nav h2 {
             margin-bottom: 30px;
             text-align: center;
             font-size: 22px;
+        }
+
+        nav h2 a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        nav h2 a:hover {
+            color: #f1c40f;
         }
 
         nav ul {
@@ -51,11 +61,12 @@
             display: block;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav ul li a:hover {
             background-color: #495057;
+            transform: translateX(10px);
         }
 
         nav .logout {
@@ -63,43 +74,129 @@
             text-align: center;
         }
 
-        /* Main Content */
+        nav .logout a {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid red;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav .logout a:hover {
+            background-color: red;
+            color: white;
+        }
+
         main {
             flex-grow: 1;
             padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
         }
 
         main h1 {
+            font-size: 28px;
             margin-bottom: 20px;
+            color: #495057;
         }
 
         .card {
-            background-color: white;
+            margin: 20px 0;
             padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         .card h3 {
+            font-size: 20px;
             margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .card p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .tables {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .users table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .users table th,
+        .users table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .users table th {
+            background-color: #343a40;
+            color: white;
+            font-size: 16px;
+        }
+
+        .users table tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        .users table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .password {
+            cursor: pointer;
+        }
+
+        .password input {
+            border: none;
+            background: none;
+            font: inherit;
+            color: inherit;
+            width: 100%;
+        }
+
+        .password input:focus {
+            outline: none;
         }
     </style>
+
 </head>
 <body>
 
 <nav>
-    <h2>Admin Dashboard</h2>
+    <h2><a href="#">Admin Dashboard</a></h2>
     <ul>
         <li><a th:href="@{/product/product_page}">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="#clients">Clients</a></li>
         <li><a th:href="@{/client/products}">Client Products</a></li>
         <li><a th:href="@{/addCategory}">Add Category</a></li>
+        <li><a th:href="@{/client/getUser}">Users</a></li>
     </ul>
     <div class="logout">
-        <a href="#" style="color: red;">Logout</a>
+        <a href="#">Logout</a>
     </div>
 </nav>
 

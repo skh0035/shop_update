@@ -16,8 +16,9 @@
             display: flex;
             min-height: 100vh;
             background-color: #f4f4f4;
+            color: #333;
         }
-        /* Sidebar/Nav */
+
         nav {
             width: 250px;
             background-color: #343a40;
@@ -26,22 +27,23 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
         nav h2 {
             margin-bottom: 30px;
             text-align: center;
             font-size: 22px;
-
-
         }
-        nav h2 a{
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 22px;
+
+        nav h2 a {
             text-decoration: none;
             color: white;
-            display: block;
+            transition: color 0.3s;
+        }
+
+        nav h2 a:hover {
+            color: #f1c40f;
         }
 
         nav ul {
@@ -59,58 +61,112 @@
             display: block;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav ul li a:hover {
             background-color: #495057;
+            transform: translateX(10px);
         }
 
         nav .logout {
             margin-top: auto;
             text-align: center;
-
         }
+
+        nav .logout a {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid red;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav .logout a:hover {
+            background-color: red;
+            color: white;
+        }
+
+        /* Main Content */
         main {
             flex-grow: 1;
             padding: 40px;
         }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #343a40;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #343a40;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #495057;
+        }
     </style>
 </head>
-<body bgcolor="#696969">
+<body>
 <nav>
     <h2><a th:href="@{/product/admin}">Admin Dashboard</a></h2>
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="#clients">Clients</a></li>
+        <li><a th:href="@{/client/getUser}">Users</a></li>
         <li><a th:href="@{/client/products}">Client Products</a></li>
     </ul>
     <div class="logout">
-        <a href="#" style="color: red;">Logout</a>
+        <a href="#">Logout</a>
     </div>
 </nav>
-<center>
-    <div class="main">
-
-
-    </div>
-</center>
-<header>
-  <h1>Add Category</h1>
-</header>
-<!--<div class="buttons">-->
-<!--  <a th:href="@{/product/admin}"><button>Admin page</button></a>-->
-
-<!--</div>-->
-<form th:action="@{saveCategory}" th:object="${category}" method="POST">
-
-  <label for="name">Category Name</label>
-  <input type="text" name="name" id="name" th:field="*{c_name}" placeholder="name" required/>
-
-  <button type="submit">Save</button>
-
-
-</form>
+<main>
+    <header>
+        <h1>Add Category</h1>
+    </header>
+    <form th:action="@{saveCategory}" th:object="${category}" method="POST">
+        <label for="name">Category Name</label>
+        <input type="text" name="name" id="name" th:field="*{c_name}" placeholder="Enter category name" required />
+        <button type="submit">Save</button>
+    </form>
+</main>
 </body>
 </html>

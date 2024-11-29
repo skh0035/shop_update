@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../css/admin/style.css">
     <style>
         * {
@@ -16,8 +16,11 @@
         body {
             display: flex;
             min-height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
+            color: #212529;
+            overflow: hidden;
         }
+
         /* Sidebar/Nav */
         nav {
             width: 250px;
@@ -27,22 +30,22 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
         }
 
         nav h2 {
             margin-bottom: 30px;
             text-align: center;
-            font-size: 22px;
-
-
+            font-size: 24px;
         }
-        nav h2 a{
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 22px;
+
+        nav h2 a {
             text-decoration: none;
             color: white;
-            display: block;
         }
 
         nav ul {
@@ -67,14 +70,107 @@
             background-color: #495057;
         }
 
-        nav .logout {
-            margin-top: auto;
-            text-align: center;
-
+        nav .logout a {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
         }
+
+        nav .logout a:hover {
+            color: #ff6f6f;
+        }
+
         main {
             flex-grow: 1;
             padding: 40px;
+            margin-left: 250px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tables {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        table img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        form {
+            margin: 10px 0;
+            display: inline;
+        }
+
+        form select, form button {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            outline: none;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .button a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button a:hover {
+            background-color: #218838;
+        }
+
+        .tables .products {
+            margin-top: 20px;
+        }
+
+        .logout {
+            margin-top: auto;
+            text-align: center;
         }
     </style>
 </head>
@@ -84,63 +180,66 @@
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="#clients">Clients</a></li>
         <li><a th:href="@{/client/products}">Client Products</a></li>
         <li><a th:href="@{/addCategory}">Add Category</a></li>
         <li><a th:href="@{/product/add}">Add Product</a></li>
     </ul>
     <div class="logout">
-        <a href="#" style="color: red;">Logout</a>
+        <a href="#">Logout</a>
     </div>
 </nav>
-<center>
+<main>
     <div class="main">
-
-
+        <h1>Product Management</h1>
+        <div class="tables">
+            <div class="products">
+                <form action="#" th:action="@{/product/sortBy}" method="get">
+                    <select name="order" th:value="${order}">
+                        <option value="price_high_to_low">Price High to Low</option>
+                        <option value="low_to_high">Low to High</option>
+                        <option value="name_asc">From A-Z</option>
+                        <option value="name_desc">From Z-A</option>
+                    </select>
+                    <button type="submit">Sort</button>
+                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th>Features</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="'$' + ${product.price}"></td>
+                        <td th:text="${product.quantity}"></td>
+                        <td th:text="${product.category.getC_name()}"></td>
+                        <td>
+                            <img style="width: 100px; height: 100px;"
+                                 th:src="@{'/product/' + ${product.id}}"
+                                 th:alt="${product.name}" alt="Image">
+                        </td>
+                        <td>
+                            <form th:action="@{/product/delete/{id}(id=${product.id})}" method="post">
+                                <button type="submit" style="background-color: #dc3545; color: white;">Delete</button>
+                            </form>
+                            <form th:action="@{/product/edit/{id}(id=${product.id})}" method="get">
+                                <button type="submit" style="background-color: #ffc107; color: black;">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</center>
-<div class="tables">
-    <div class="products">
-        <form action="#" th:action="@{/product/sortBy}" method="get">
-            <select name="order" th:value="${order}">
-                <option value="price_high_to_low">Price High to Low</option>
-                <option value="low_to_high">Low to High</option>
-                <option value="name_asc">From A-Z</option>
-                <option value="name_desc">From Z-A</option>
-            </select>
-            <button type="submit">Sort</button>
-        </form>
-
-
-        <table border="2px">
-            <tr >
-                <td>Id</td>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Quantity</td>
-                <td>Category</td>
-                <td>Image</td>
-                <td>Features</td>
-            </tr>
-            <tr th:each="product: ${products}">
-                <td th:text="${product.id}"></td>
-                <td th:text="${product.name}"></td>
-                <td th:text="'$' + ${product.price}"></td>
-                <td th:text="${product.quantity}"></td>
-                <td th:text="${product.category.getC_name()}"></td>
-                <td>      <img style="width: 200px; height: 200px;"
-                               th:src="@{'/product/'+${product.id}}"
-                               th:alt="${product.name}" alt="Image"></td>
-                <td>
-                    <form th:action="@{/product/delete/{id}(id=${product.id})}"><button type="submit">Delete</button></form>
-                    <form th:action="@{/product/edit/{id}(id=${product.id})}"><button type="submit">Update</button></form></td>
-
-        </table>
-<!--        <div class="button">-->
-<!--            <a th:href="@{/product/add}"><button>Add</button></a>-->
-
-<!--        </div>-->
-    </div>
-</div>
+</main>
 </body>
 </html>
