@@ -18,7 +18,9 @@ public class Order {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "quantity", nullable = false)
     private Cart cart;
     @ManyToOne
+    @JoinColumn(name = "orederedItems", nullable = false)
     private Products product;
 }

@@ -3,8 +3,12 @@ package com.example.shop.Controller;
 import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
 
+import com.example.shop.Entity.User;
+import com.example.shop.Repository.UserRepository;
 import com.example.shop.Services.ClientService;
 import com.example.shop.Services.ProdService;
+import com.example.shop.Services.UserService;
+import jakarta.jws.soap.SOAPBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,8 @@ public class ClientController {
     private ClientService clientService;
     @Autowired
     private ProdService prodService;
+    @Autowired
+    private UserRepository userRepository;
     @GetMapping("/products")
     public String GetProds(Model model) {
         model.addAttribute("products", clientService.GetProd());
@@ -55,6 +61,18 @@ public class ClientController {
         List<Products>  products = clientService.getProductsByCategory(categoryId);
         model.addAttribute("product_kids", products);
         return "products_kids";
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(Model model){
+        model.addAttribute("user", new User());
+        return "user_add";
+    }
+
+    @PostMapping("/saveUser")
+    public String saveUser(User user){
+     userRepository.save(user);
+        return "redirect:/client/addUser";
     }
 
 
