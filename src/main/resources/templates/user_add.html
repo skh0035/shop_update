@@ -5,15 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        nav h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        nav h2 a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        nav h2 a:hover {
+            color: #f1c40f;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057;
+            transform: translateX(10px);
+        }
+
+        nav .logout {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        nav .logout a {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid red;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav .logout a:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .content {
+            margin-left: 250px; /* This ensures the content is to the right of the navbar */
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            padding: 20px;
         }
 
         .register-container {
@@ -90,6 +177,10 @@
         }
 
         @media (max-width: 500px) {
+            .content {
+                margin-left: 0;
+            }
+
             .register-container {
                 padding: 20px;
             }
@@ -105,18 +196,34 @@
     </style>
 </head>
 <body>
-<div class="register-container">
-    <h1>Register</h1>
-    <form th:action="@{saveUser}" th:object="${user}" method="POST">
-        <label for="username">Set Username</label>
-        <input type="text" name="username" id="username" th:field="*{username}" placeholder="Username" required/>
+<nav>
+    <h2><a href="/product/admin">Admin Dashboard</a></h2>
+    <ul>
+        <li><a href="#sales">Sales</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="/client/products">Client Products</a></li>
+        <li><a href="/addCategory">Add Category</a></li>
+        <li><a href="/product/add">Add Product</a></li>
+        <li><a href="/client/getUser">Users</a></li>
+    </ul>
+    <div class="logout">
+        <a href="#">Logout</a>
+    </div>
+</nav>
+<div class="content">
+    <div class="register-container">
+        <h1>Register</h1>
+        <form action="/saveUser" method="POST">
+            <label for="username">Set Username</label>
+            <input type="text" name="username" id="username" placeholder="Username" required/>
 
-        <label for="password">Set Password</label>
-        <input type="text" name="password" id="password" th:field="*{password}" placeholder="Password" required/>
+            <label for="password">Set Password</label>
+            <input type="text" name="password" id="password" placeholder="Password" required/>
 
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="/login">Login here</a></p>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login here</a></p>
+    </div>
 </div>
 </body>
 </html>
