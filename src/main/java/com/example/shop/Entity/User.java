@@ -24,9 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "cart", nullable = true)
-    private Cart cart;
+
 
     @Column(name = "role", nullable = false)
     private String role;

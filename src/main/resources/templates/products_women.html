@@ -52,13 +52,13 @@
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             <li class="scroll-to-section"><a href="index.html" class="active">Asosiy</a></li>
-            <li class="scroll-to-section"><a th:href="@{/client/product_men/1}">Erkaklar</a></li>
-            <li class="scroll-to-section"><a th:href="@{/client/product_kids/3}">Bolalar</a></li>
+            <li class="scroll-to-section"><a th:href="@{/user/product_men/1}">Erkaklar</a></li>
+            <li class="scroll-to-section"><a th:href="@{/user/product_kids/3}">Bolalar</a></li>
             <li class="submenu">
               <a href="javascript:;">Sahifalar</a>
               <ul>
                 <li><a href="about.html">Biz haqimizda</a></li>
-                <li><a th:href="@{/client/products}">Mahsulotlar</a></li>
+                <li><a th:href="@{/user/products}">Mahsulotlar</a></li>
                 <li><a href="contact.html">Bog'lanish</a></li>
               </ul>
             </li>
@@ -72,7 +72,7 @@
               </ul>
             </li>
             <li class="scroll-to-section"><a th:href="@{/product/admin}">Kashf qiling</a></li>
-            <li class="fa fa-shopping-cart"><a th:href="@{/client/cart}"></a></li>
+            <li class="fa fa-shopping-cart"><a th:href="@{/user/cart}"></a></li>
           </ul>
           <a class='menu-trigger'>
             <span>Menyu</span>
@@ -119,7 +119,7 @@
           <div class="thumb">
             <div class="hover-content">
               <ul>
-                <li><a th:href="@{/client/single_product/{id}(id=${product.id})}"><i class="fa fa-eye"></i></a></li>
+                <li><a th:href="@{/user/single_product/{id}(id=${product.id})}"><i class="fa fa-eye"></i></a></li>
 <!--                <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>-->
 <!--                <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>-->
               </ul>

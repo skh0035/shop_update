@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title text="title">Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+      color: #212529;
+      margin: 0;
+    }
+    nav {
+      width: 250px;
+      background-color: #343a40;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    nav h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 22px;
+    }
+    nav h2 a {
+      text-decoration: none;
+      color: white;
+      transition: color 0.3s;
+    }
+    nav h2 a:hover {
+      color: #f1c40f;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 15px 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      display: block;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    nav ul li a:hover {
+      background-color: #495057;
+      transform: translateX(10px);
+    }
+    nav .logout {
+      margin-top: auto;
+      text-align: center;
+    }
+    nav .logout a {
+      color: red;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 15px;
+      border: 1px solid red;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    nav .logout a:hover {
+      background-color: red;
+      color: white;
+    }
+    .content {
+      margin-left: 250px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .login-container {
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      padding: 25px 35px;
+      border-radius: 12px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid #ddd;
+    }
+    .login-container h1 {
+      font-size: 26px;
+      margin-bottom: 25px;
+      color: #222;
+      text-align: center;
+      font-weight: 600;
+    }
+    label {
+      display: block;
+      margin: 15px 0 8px;
+      font-weight: bold;
+      color: #444;
+      font-size: 14px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .login-container p {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+    .login-container p a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .login-container p a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 500px) {
+      .content {
+        margin-left: 0;
+      }
+      .login-container {
+        padding: 20px;
+      }
+      .login-container h1 {
+        font-size: 22px;
+      }
+      input[type="text"], input[type="password"], button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!--<nav>
+  <h2><a th:href="@{/product/admin}">Admin Dashboard</a></h2>
+  <ul>
+    <li><a th:href="@{/sales}">Sales</a></li>
+    <li><a th:href="@{/orders}">Orders</a></li>
+    <li><a th:href="@{/user/products}">Client Products</a></li>
+    <li><a th:href="@{/addCategory}">Add Category</a></li>
+    <li><a th:href="@{/product/add}">Add Product</a></li>
+    <li><a th:href="@{/user/getUser}">Users</a></li>
+  </ul>
+  <div class="logout">
+    <a th:href="@{/logout}">Logout</a>
+  </div>
+</nav>-->
+<div class="content">
+  <div class="login-container">
+    <h1>Login</h1>
+    <form th:action="@{/loginUser}" method="POST">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" placeholder="Username" th:placeholder="${placeholderUsername}" required/>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password" th:placeholder="${placeholderPassword}" required/>
+
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a th:href="@{/user/register}">Register here</a></p>
+  </div>
+</div>
+</body>
+</html>

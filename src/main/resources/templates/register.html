@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,33 +196,33 @@
     </style>
 </head>
 <body>
-<nav>
+<!--<nav>
     <h2><a href="/product/admin">Admin Dashboard</a></h2>
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="/client/products">Client Products</a></li>
+        <li><a href="/user/products">Client Products</a></li>
         <li><a href="/addCategory">Add Category</a></li>
         <li><a href="/product/add">Add Product</a></li>
-        <li><a href="/client/getUser">Users</a></li>
+        <li><a href="/user/getUser">Users</a></li>
     </ul>
     <div class="logout">
         <a href="#">Logout</a>
     </div>
-</nav>
+</nav>-->
 <div class="content">
     <div class="register-container">
         <h1>Register</h1>
-        <form action="/saveUser" method="POST">
+        <form action="/user/saveUser" method="POST">
             <label for="username">Set Username</label>
             <input type="text" name="username" id="username" placeholder="Username" required/>
 
             <label for="password">Set Password</label>
             <input type="text" name="password" id="password" placeholder="Password" required/>
 
-            <button type="submit">Register</button>
+            <button  type="submit">Register</button>
         </form>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p>Already have an account? <a th:href="@{/user/login}">Login here</a></p>
     </div>
 </div>
 </body>
