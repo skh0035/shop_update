@@ -1,4 +1,3 @@
-/*
 package com.example.shop.Configuration;
 
 import com.example.shop.Entity.User;
@@ -36,7 +35,7 @@ public class UserDetailsConfiguration implements UserDetails {
     }
 
     @Override
-    public boole    an isAccountNonExpired() {
+    public boolean isAccountNonExpired() {
         return true;
     }
     @Override
@@ -49,4 +48,3 @@ public class UserDetailsConfiguration implements UserDetails {
     }
 
 }
-*/
