@@ -7,21 +7,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
 @Component
 public class SuccessHandler implements AuthenticationSuccessHandler {
 
-  /*  @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        AuthenticationSuccessHandler.super.onAuthenticationSuccess(request, response, chain, authentication);
-    }
-*/
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
 
-    }
+
+
+  @Override
+  public void onAuthenticationSuccess(HttpServletRequest request,
+                                      HttpServletResponse response,
+                                      Authentication authentication) throws IOException, ServletException {
+        UserDetailsConfiguration userDetails = (UserDetailsConfiguration)authentication.getPrincipal();
+
+        String username = userDetails.getUsername();
+        Long userId = userDetails.getId();
+
+        String redirect = UriComponentsBuilder.fromPath("/user/"+userId).build().toUriString();
+
+        response.sendRedirect(redirect);
+  }
 }

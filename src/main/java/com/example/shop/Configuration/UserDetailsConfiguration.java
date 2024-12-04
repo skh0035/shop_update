@@ -47,4 +47,8 @@ public class UserDetailsConfiguration implements UserDetails {
         return true;
     }
 
+    public Long getId(){
+        return user.getId();
+    }
+
 }

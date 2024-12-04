@@ -54,10 +54,10 @@ public class SecurityConfiguration {
                         .authenticationProvider(authenticationProvider())
                 .sessionManagement(req -> req
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .invalidSessionUrl("enter/login")
+                        .invalidSessionUrl("/enter/login")
                         .maximumSessions(2)
                         .maxSessionsPreventsLogin(true)
-                        .expiredUrl("enter/login"));
+                        .expiredUrl("/enter/login"));
 
 
         return http.build();
@@ -67,6 +67,8 @@ public class SecurityConfiguration {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
-        return null;
+        return provider;
     }
+
+
 }
