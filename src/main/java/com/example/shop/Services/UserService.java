@@ -1,5 +1,6 @@
 package com.example.shop.Services;
 
+import com.example.shop.Entity.Products;
 import com.example.shop.Entity.User;
 import com.example.shop.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class UserService {
     }
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    public void updateUser(Long id, User updatedUser, String role) {
+        User existingUser = findByUserId(id);
+        existingUser.setRole(role);
+        userRepository.save(existingUser);
     }
 
 }
