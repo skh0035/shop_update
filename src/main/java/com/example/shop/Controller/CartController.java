@@ -23,14 +23,17 @@ public class CartController extends GlobalController{
     @Autowired
     ProdService prodService;
 
-    @GetMapping("/cart")
-    public String viewCart(Model model) {
+    @GetMapping("{userId}/cart")
+    public String viewCart(@AuthenticationPrincipal UserDetailsConfiguration userDetails,Model model) {
+        model.addAttribute("userId",userDetails.getUserId());
         model.addAttribute("cart", cartService.getCartItems());
         return "Cart";
     }
 
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId, @RequestParam int quantity, @RequestParam Long userId) {
+    public String addToCart(@PathVariable Long productId, @RequestParam int quantity, @AuthenticationPrincipal UserDetailsConfiguration userDetails, Model model) {
+        Long userId = userDetails.getUserId();
+        model.addAttribute("userId",userId);
         cartService.addToCart(productId, quantity, userId);
         return "redirect:/user/{userId}/cart";
     }

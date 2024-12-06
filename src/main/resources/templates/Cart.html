@@ -185,7 +185,7 @@
     </div>
 
 
-    <form th:action="@{/user/{userId}/delete/{id}(id=${cart.id})}"><button class="remove-btn">Remove</button></form>
+    <form th:action="@{/user/{userId}/delete/{id}(id=${cart.id}, userId=${userId})}"><button class="remove-btn">Remove</button></form>
 
 
 </div>

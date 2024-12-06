@@ -99,6 +99,11 @@ public class ProductController {
         return "product_page";
     }
 
+    @GetMapping("/user_page")
+    public String UserPage(){
+        return "User_page";
+    }
+
 
 
 }
