@@ -136,9 +136,9 @@
 
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.html" class="active">Asosiy</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_men/1}">Erkaklar</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_women/2}">Ayollar</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_kids/3}">Bolalar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_men/1(userId=${userId})}">Erkaklar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_women/2(userId=${userId})}">Ayollar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_kids/3(userId=${userId})}">Bolalar</a></li>
                         <li class="submenu">
                             <a href="javascript:;">Sahifalar</a>
                             <ul>
@@ -156,7 +156,7 @@
                                 <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">4-sahifa</a></li>
                             </ul>
                         </li>
-                        <li class="scroll-to-section"><a href="index.html">Kashf qiling</a></li>
+                        <li class="scroll-to-section"><a th:href="@{admin/{userId}/admin(userId=${userId})}">Kashf qiling</a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menyu</span>

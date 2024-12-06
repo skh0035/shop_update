@@ -176,14 +176,15 @@
 </head>
 <body>
 <nav>
-    <h2><a th:href="@{/product/admin}">Admin Dashboard</a></h2>
+    <h2><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Admin Dashboard</a></h2>
     <ul>
+        <li><a th:href="@{/user/{userId}/product_page(userId=${userId})}">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a th:href="@{/user/products}">Client Products</a></li>
-        <li><a th:href="@{/addCategory}">Add Category</a></li>
-        <li><a th:href="@{/product/add}">Add Product</a></li>
-        <li><a th:href="@{/user/register}">Add Users</a></li>
+        <li><a th:href="@{/user/{userId}/products(userId=${userId})}">User Products</a></li>
+        <li><a th:href="@{/admin/{userId}/addCategory(userId=${userId})}">Add Category</a></li>
+        <li><a th:href="@{/admin/{userId}/getUser(userId=${userId})}">User List</a></li>
+        <li><a th:href="@{/user/register}">Add User</a></li>
     </ul>
     <div class="logout">
         <a href="#">Logout</a>
@@ -194,7 +195,7 @@
         <h1>Product Management</h1>
         <div class="tables">
             <div class="products">
-                <form action="#" th:action="@{/product/sortBy}" method="get">
+                <form action="#" th:action="@{/admin/{userId}/sortBy(userId=${userId})}" method="get">
                     <select name="order" th:value="${order}">
                         <option value="price_high_to_low">Price High to Low</option>
                         <option value="low_to_high">Low to High</option>
@@ -224,14 +225,14 @@
                         <td th:text="${product.category.getC_name()}"></td>
                         <td>
                             <img style="width: 100px; height: 100px;"
-                                 th:src="@{'/product/' + ${product.id}}"
+                                 th:src="@{/admin/{userId}/{productId}(userId=${userId}, productId=${product.id})}"
                                  th:alt="${product.name}" alt="Image">
                         </td>
                         <td>
-                            <form th:action="@{/product/delete/{id}(id=${product.id})}" method="post">
+                            <form th:action="@{/admin/{userId}/delete/{id}(id=${product.id}, userId=${userId})}" method="post">
                                 <button type="submit" style="background-color: #dc3545; color: white;">Delete</button>
                             </form>
-                            <form th:action="@{/product/edit/{id}(id=${product.id})}" method="get">
+                            <form th:action="@{/admin/{userId}/edit/{id}(id=${product.id}, userId=${userId})}" method="get">
                                 <button type="submit" style="background-color: #ffc107; color: black;">Update</button>
                             </form>
                         </td>
