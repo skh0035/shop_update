@@ -7,6 +7,7 @@ import com.example.shop.Repository.ProductRepository;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.ShopServices;
 import com.example.shop.Services.UserService;
+import jakarta.jws.soap.SOAPBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -108,8 +109,14 @@ public class ProductController extends GlobalController{
     public String getUser(Model model){
         List<User> users = userService.findAll();
         model.addAttribute("user", users);
-        return "user_show";
+        return "user_page";
     }
-
+    @PostMapping("/update")
+    public String updateUser(@PathVariable Long userId,
+                             User user,
+                             @RequestParam("role")String role){
+        userService.updateUser(userId, user, role);
+        return "redirect:/admin/{userId}/getUser";
+    }
 }
 

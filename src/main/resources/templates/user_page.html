@@ -201,50 +201,27 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>JohnDoe</td>
-        <td>001</td>
+    <tr th:each="user:${user}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.id}"></td>
         <td>
-            <select>
-                <option value="ADMIN" selected>ADMIN</option>
+            <label>
+                <form th:action="@{/admin/{userId}/update(userId=${userId})}" method="post">
+            <select name="role">
+                <option th:text="${user.role}" disabled selected></option>
+                <option value="ADMIN">ADMIN</option>
                 <option value="USER">USER</option>
             </select>
+                    <button type="submit">Change</button>
+                </form>
+            </label>
+
         </td>
-        <td><button>Change</button></td>
-    </tr>
-    <tr>
-        <td>JaneSmith</td>
-        <td>002</td>
         <td>
-            <select>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER" selected>USER</option>
-            </select>
+
         </td>
-        <td><button>Change</button></td>
     </tr>
-    <tr>
-        <td>MikeBrown</td>
-        <td>003</td>
-        <td>
-            <select>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER" selected>USER</option>
-            </select>
-        </td>
-        <td><button>Change</button></td>
-    </tr>
-    <tr>
-        <td>SarahConnor</td>
-        <td>004</td>
-        <td>
-            <select>
-                <option value="ADMIN" selected>ADMIN</option>
-                <option value="USER">USER</option>
-            </select>
-        </td>
-        <td><button>Change</button></td>
-    </tr>
+
     </tbody>
 </table>
 </main>
