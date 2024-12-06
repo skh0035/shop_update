@@ -2,9 +2,11 @@ package com.example.shop.Controller;
 
 import com.example.shop.Entity.Category;
 import com.example.shop.Entity.Products;
+import com.example.shop.Entity.User;
 import com.example.shop.Repository.ProductRepository;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.ShopServices;
+import com.example.shop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +20,17 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/admin/{userId}")
+public class ProductController extends GlobalController{
     @Autowired
     private ShopServices shopServices;
     @Autowired
     private ProdService prodService;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/add")
     public String addProducts(Model model) {
         model.addAttribute("product", new Products());
@@ -68,7 +73,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deleteProd/{id}")
     public String deleteByProdId(@PathVariable Long id){
         prodService.deleteByProdId(id);
         return "redirect:/product/product_page";
@@ -99,12 +104,12 @@ public class ProductController {
         return "product_page";
     }
 
-    @GetMapping("/user_page")
-    public String UserPage(){
-        return "User_page";
+    @GetMapping("/getUser")
+    public String getUser(Model model){
+        List<User> users = userService.findAll();
+        model.addAttribute("user", users);
+        return "user_show";
     }
-
-
 
 }
 

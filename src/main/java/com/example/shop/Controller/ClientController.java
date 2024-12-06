@@ -18,19 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/{userId}")
 public class ClientController{
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private ClientService clientService;
     @Autowired
     private ProdService prodService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserService userService;
-    @GetMapping("/{userId}/products")
+    @GetMapping("/products")
     public String GetProds(@AuthenticationPrincipal UserDetailsConfiguration userDetails,Model model) {
         model.addAttribute("userId", userDetails.getUserId());
         model.addAttribute("products", clientService.GetProd());
@@ -42,7 +37,7 @@ public class ClientController{
        model.addAttribute("products", products);
         return "/products_men";
     }*/
-    @GetMapping("/{userId}/single_product/{id}")
+    @GetMapping("/single_product/{id}")
     public String prodDetails(@PathVariable Long id, Model model,@AuthenticationPrincipal UserDetailsConfiguration userDetails){
         Long userId = userDetails.getUserId();
         Products product = clientService.getProductById(id);
@@ -70,40 +65,7 @@ public class ClientController{
         return "products_kids";
     }
 
-    @GetMapping("/register")
-    public String addUser(Model model){
-        model.addAttribute("user", new User());
-        return "register";
-    }
 
-    @PostMapping("/saveUser")
-    public String saveUser(User user){
-        user.setRole("USER");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-     userRepository.save(user);
-        return "redirect:/user/login?success=true";
-    }
-
-    @GetMapping("/getUser")
-    public String getUser(Model model){
-        List<User> users = userService.findAll();
-        model.addAttribute("user", users);
-        return "user_show";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model){
-        return "login";
-    }
-
-    @PostMapping("/loginCheck")
-    public String handleLogin(@RequestParam String username, @RequestParam String password, Model model) {
-        model.addAttribute("username", username);
-        model.addAttribute("password", password);
-
-
-        return "redirect:/user/products";
-    }
 
 
 

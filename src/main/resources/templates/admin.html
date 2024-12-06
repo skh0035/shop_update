@@ -188,13 +188,13 @@
 <nav>
     <h2><a href="#">Admin Dashboard</a></h2>
     <ul>
-        <li><a th:href="@{/product/product_page}">Products</a></li>
+        <li><a th:href="@{/user/{userId}/product_page(userId=${userId})}">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a th:href="@{/user/products}">User Products</a></li>
-        <li><a th:href="@{/addCategory}">Add Category</a></li>
-        <li><a th:href="@{/user/getUser}">Users</a></li>
-        <li><a th:href="@{/user/register}">Add Users</a></li>
+        <li><a th:href="@{/user/{userId}/products(userId=${userId})}">User Products</a></li>
+        <li><a th:href="@{/admin/{userId}/addCategory(userId=${userId})}">Add Category</a></li>
+        <li><a th:href="@{/user/{userId}/getUser(userId=${userId})}">User List</a></li>
+        <li><a th:href="@{/user/register}">Add User</a></li>
     </ul>
     <div class="logout">
         <a href="#">Logout</a>

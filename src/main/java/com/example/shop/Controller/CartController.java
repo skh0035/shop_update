@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/{userId}")
 public class CartController extends GlobalController{
     @Autowired
     private CartService cartService;
@@ -23,9 +23,9 @@ public class CartController extends GlobalController{
     @Autowired
     ProdService prodService;
 
-    @GetMapping("{userId}/cart")
-    public String viewCart(@AuthenticationPrincipal UserDetailsConfiguration userDetails,Model model) {
-        model.addAttribute("userId",userDetails.getUserId());
+    @GetMapping("/cart")
+    public String viewCart(Model model) {
+
         model.addAttribute("cart", cartService.getCartItems());
         return "Cart";
     }
@@ -40,13 +40,13 @@ public class CartController extends GlobalController{
     @GetMapping("/delete")
     public String deleteProduct() {
         cartService.deleteAll();
-        return "redirect:/cart/cart";
+        return "redirect:/user/{userId}/cart";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteByProdId(@PathVariable Long id){
         cartService.deleteById(id);
-        return "redirect:/cart/cart";
+        return "redirect:/user/{userId}/cart";
     }
 
 

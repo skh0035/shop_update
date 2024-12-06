@@ -67,7 +67,7 @@
                                 <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Shablon Sahifasi 4</a></li>
                             </ul>
                         </li>
-                        <li class="scroll-to-section"><a th:href="@{/product/admin}">Kashf etish</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Kashf etish</a></li>
                         <li class="fa fa-shopping-cart"><a th:href="@{/cart/cart}"></a></li>
                     </ul>
                     <a class='menu-trigger'>
@@ -102,8 +102,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-heading">
-<!--                    <h2>Bizning So'nggi Mahsulotlarimiz</h2>-->
-                    <h2><span th:text="${userId}"></span></h2>
+                  <h2>Bizning So'nggi Mahsulotlarimiz</h2>
+
                     <span>Barcha mahsulotlarimizni ko'ring.</span>
                 </div>
             </div>
