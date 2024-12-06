@@ -24,9 +24,9 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         UserDetailsConfiguration userDetails = (UserDetailsConfiguration)authentication.getPrincipal();
 
         String username = userDetails.getUsername();
-        Long userId = userDetails.getId();
+        Long userId = userDetails.getUserId();
 
-        String redirect = UriComponentsBuilder.fromPath("/user/"+userId).build().toUriString();
+        String redirect = UriComponentsBuilder.fromPath("/user/"+userId+"/products").build().toUriString();
 
         response.sendRedirect(redirect);
   }

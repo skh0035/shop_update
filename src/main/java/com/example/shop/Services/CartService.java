@@ -7,10 +7,10 @@ import com.example.shop.Entity.User;
 import com.example.shop.Repository.CartRepository;
 import com.example.shop.Repository.OrderRepository;
 import com.example.shop.Repository.ProductRepository;
+import com.example.shop.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +24,18 @@ public class CartService {
     OrderRepository orderRepository;
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    UserRepository userRepository;
 
 
-    public void addToCart(Long productId, int quantity) {
+    public void addToCart(Long productId, int quantity, Long userId) {
         Products product = prodService.getProductById(productId);
+        User user = userRepository.findUserById(userId);
         if (product != null) {
             Cart cart = new Cart();
             cart.setProduct(product);
             cart.setQuantity(quantity);
+            cart.setUser(user);
             cartRepository.save(cart);
         }
     }

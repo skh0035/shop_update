@@ -24,14 +24,14 @@ public class Cart {
 
     @Column(name = "quantity")
     private int quantity;
-/*
-    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
-    private User user;*/
+
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private Products product;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+   /* @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
-
+*/
 }

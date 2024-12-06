@@ -1,5 +1,6 @@
 package com.example.shop.Controller;
 
+import com.example.shop.Configuration.UserDetailsConfiguration;
 import com.example.shop.Entity.Cart;
 import com.example.shop.Entity.Products;
 import com.example.shop.Entity.User;
@@ -7,19 +8,21 @@ import com.example.shop.Services.CartService;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/cart")
-public class CartController {
+@RequestMapping("/user")
+public class CartController extends GlobalController{
     @Autowired
     private CartService cartService;
     @Autowired
     private UserService userService;
     @Autowired
     ProdService prodService;
+
     @GetMapping("/cart")
     public String viewCart(Model model) {
         model.addAttribute("cart", cartService.getCartItems());
@@ -27,9 +30,9 @@ public class CartController {
     }
 
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId, @RequestParam int quantity) {
-        cartService.addToCart(productId, quantity);
-        return "redirect:/cart/cart";
+    public String addToCart(@PathVariable Long productId, @RequestParam int quantity, @RequestParam Long userId) {
+        cartService.addToCart(productId, quantity, userId);
+        return "redirect:/user/{userId}/cart";
     }
     @GetMapping("/delete")
     public String deleteProduct() {

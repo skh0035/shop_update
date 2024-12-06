@@ -1,5 +1,6 @@
 package com.example.shop.Controller;
 
+import com.example.shop.Configuration.UserDetailsConfiguration;
 import com.example.shop.Entity.Products;
 
 import com.example.shop.Entity.User;
@@ -8,6 +9,7 @@ import com.example.shop.Services.ClientService;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class ClientController {
+public class ClientController{
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -28,8 +30,9 @@ public class ClientController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-    @GetMapping("/products")
-    public String GetProds(Model model) {
+    @GetMapping("/{userId}/products")
+    public String GetProds(@AuthenticationPrincipal UserDetailsConfiguration userDetails,Model model) {
+        model.addAttribute("userId", userDetails.getUserId());
         model.addAttribute("products", clientService.GetProd());
         return "/products";
     }
@@ -39,10 +42,12 @@ public class ClientController {
        model.addAttribute("products", products);
         return "/products_men";
     }*/
-    @GetMapping("/single_product/{id}")
-    public String prodDetails(@PathVariable Long id, Model model){
+    @GetMapping("/{userId}/single_product/{id}")
+    public String prodDetails(@PathVariable Long id, Model model,@AuthenticationPrincipal UserDetailsConfiguration userDetails){
+        Long userId = userDetails.getUserId();
         Products product = clientService.getProductById(id);
         model.addAttribute("single_prod", product);
+        model.addAttribute("userId", userId);
         return "single-product";
     }
 
@@ -89,6 +94,15 @@ public class ClientController {
     @GetMapping("/login")
     public String login(Model model){
         return "login";
+    }
+
+    @PostMapping("/loginCheck")
+    public String handleLogin(@RequestParam String username, @RequestParam String password, Model model) {
+        model.addAttribute("username", username);
+        model.addAttribute("password", password);
+
+
+        return "redirect:/user/products";
     }
 
 

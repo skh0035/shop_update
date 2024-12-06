@@ -131,7 +131,7 @@
                     <div class="quote">
                         <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
                     </div>
-                    <form th:action="@{/cart/add/{productId}(productId=${single_prod.id})}">
+                    <form th:action="@{/user/{userId}/add/{productId}(productId=${single_prod.id},userId=${userId})}">
                     <div class="quantity-content">
                         <div class="left-content">
                             <h6>Buyurtmalar soni</h6>
