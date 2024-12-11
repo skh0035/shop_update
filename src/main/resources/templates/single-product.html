@@ -57,16 +57,17 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.html" class="active">Bosh sahifa</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_men/1}">Erkaklar</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_women/2}">Ayollar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_men/1(userId=${userId})}">Erkaklar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_women/2(userId=${userId})}">Ayollar</a></li>
                         <li class="scroll-to-section"><a th:href="@{/user/product_kids/3}">Bolalar</a></li>
+                        <li class="submenu">
                         <li class="submenu">
                             <a href="javascript:;">Sahifalar</a>
                             <ul>
                                 <li><a href="about.html">Biz haqimizda</a></li>
                                 <li><a href="products.html">Mahsulotlar</a></li>
                                 <li><a href="single-product.html">Yagona Mahsulot</a></li>
-                                <li><a th:href="@{/product/admin}">Biz bilan bog'lanish</a></li>
+                                <li><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Biz bilan bog'lanish</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
@@ -113,7 +114,7 @@
         <div class="row">
             <div class="col-lg-8" th:each="single_prod:${single_prod}">
                 <div class="left-images">
-                    <img style="height: 300px;width: 300px" th:src="@{'/product/' + ${single_prod.id}}" th:alt="${single_prod.name}">
+                    <img style="height: 300px;width: 300px" th:src="@{/user/{userId}/{productsId}(userId=${userId}, productsId=${single_prod.id})}" th:alt="${single_prod.name}">
                 </div>
             </div>
             <div class="col-lg-4">

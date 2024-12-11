@@ -80,13 +80,13 @@
 </head>
 <body bgcolor="#696969">
 <nav>
-    <h2><a th:href="@{/product/admin}">Admin Dashboard</a></h2>
+    <h2><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Admin Dashboard</a></h2>
     <ul>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
         <li><a href="#clients">Clients</a></li>
-        <li><a th:href="@{/user/products}">Client Products</a></li>
-        <li><a th:href="@{/addCategory}">Add Category</a></li>
+        <li><a th:href="@{/user/{userId}/products(userId=${userId})}">User Products</a></li>
+        <li><a th:href="@{/admin/{userId}/addCategory(userId=${userId})}">Add Category</a></li>
     </ul>
     <div class="logout">
         <a href="#" style="color: red;">Logout</a>
@@ -101,7 +101,7 @@
 
 
 <h4>Edit Product</h4>
-<form th:action="@{/product/postEdit/{id}(id=${product.id})}" th:object="${product}" method="post">
+<form th:action="@{/admin/{userId}/postEdit/{id}(id=${product.id}, userId=${userId})}" th:object="${product}" method="post">
     <label for="name" th:text="'Name:'"></label>
     <input type="text" id="name" th:field="*{name}" required />
 
