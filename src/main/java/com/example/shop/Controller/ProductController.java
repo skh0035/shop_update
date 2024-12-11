@@ -41,16 +41,17 @@ public class ProductController extends GlobalController{
 
     @PostMapping("/save")
     public String saveProd(@RequestParam("name") String name,  @RequestParam("quantity") int quantity,@RequestParam("category") Category category,
-                           @RequestParam("price") double price , @RequestParam("image") MultipartFile image) throws IOException {
+                           @RequestParam("price") double price ,@RequestParam("desc")String desc, @RequestParam("image") MultipartFile image) throws IOException {
 
         Products pr = new Products();
         pr.setName(name);
         pr.setPrice(price);
         pr.setQuantity(quantity);
         pr.setCategory(category);
+        pr.setDesc(desc);
         pr.setImageType(image.getContentType());
         prodService.saveAllProd(pr, image);
-        return "redirect:/admin{userId}/add";
+        return "redirect:/admin/{userId}/add";
     }
     @GetMapping("/product_page")
     public String showProducts( Model model) {

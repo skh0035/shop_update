@@ -29,7 +29,8 @@ public class Products {
     @Column(name = "prod_quant")
     private int quantity;
 
-
+    @Column(name = "description", nullable = false)
+    private String desc;
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
