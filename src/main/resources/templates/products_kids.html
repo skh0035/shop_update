@@ -52,7 +52,7 @@
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             <li class="scroll-to-section"><a href="index.html" class="active">Bosh sahifa</a></li>
-            <li class="scroll-to-section"><a th:href="@{/user{userId}/product_men/1(userId=${userId})}">Erkaklar</a></li>
+            <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_men/1(userId=${userId})}">Erkaklar</a></li>
             <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_women/2(userId=${userId})}">Ayollar</a></li>
 
             <li class="submenu">
@@ -73,6 +73,7 @@
               </ul>
             </li>
             <li class="scroll-to-section"><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Kashf eting</a></li>
+            <li class="fa fa-shopping-cart"><a th:href="@{/user/{userId}/cart(userId=${userId})}"></a></li>
 <!--            <li class="fa fa-shopping-cart"><a th:href="@{/client/cart}"></a></li>-->
           </ul>
           <a class='menu-trigger'>
