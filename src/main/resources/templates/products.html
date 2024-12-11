@@ -68,7 +68,7 @@
                             </ul>
                         </li>
                         <li class="scroll-to-section"><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Kashf etish</a></li>
-                        <li class="fa fa-shopping-cart"><a th:href="@{/cart/cart}"></a></li>
+                        <li class="fa fa-shopping-cart"><a th:href="@{/user/{userId}/cart(userId=${userId})}"></a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menyu</span>
@@ -121,7 +121,7 @@
 <!--                                <li><a th:href="@{/cart/add/{productId}(productId=${products.id})}"><i class="fa fa-shopping-cart"></i></a></li>-->
                             </ul>
                         </div>
-                        <img style="" th:src="@{'/product/' + ${products.id}}"
+                        <img style="" th:src="@{/user/{userId}/{productsId}(userId=${userId}, productsId=${products.id})}"
                              th:alt="${products.name}" alt="rasm">
                     </div>
                     <div class="down-content">

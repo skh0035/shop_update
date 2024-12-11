@@ -171,7 +171,7 @@
 
 
 <div class="cart-item" th:each="cart : ${cart}">
-    <img style="width: 150px; height: 150px" th:src="@{'/product/' + ${cart.product.id}}" th:alt="${cart.product.name}">
+    <img style="width: 150px; height: 150px" th:src="@{admin/{userId}/{productsId}(userId=${userId}, productsId=${cart.product.id})}" th:alt="${cart.product.name}">
 
     <div class="product-details">
         <h4 th:text="${cart.product.name}"></h4>

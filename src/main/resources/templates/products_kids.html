@@ -52,14 +52,14 @@
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             <li class="scroll-to-section"><a href="index.html" class="active">Bosh sahifa</a></li>
-            <li class="scroll-to-section"><a th:href="@{/user/product_men/1}">Erkaklar</a></li>
-            <li class="scroll-to-section"><a th:href="@{/user/product_women/2}">Ayollar</a></li>
+            <li class="scroll-to-section"><a th:href="@{/user{userId}/product_men/1(userId=${userId})}">Erkaklar</a></li>
+            <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_women/2(userId=${userId})}">Ayollar</a></li>
 
             <li class="submenu">
               <a href="javascript:;">Sahifalar</a>
               <ul>
                 <li><a href="about.html">Biz haqimizda</a></li>
-                <li><a th:href="@{/user/products}">Mahsulotlar</a></li>
+                <li><a th:href="@{/user/{userId}/products(userId=${userId})}">Mahsulotlar</a></li>
                 <li><a href="contact.html">Aloqa</a></li>
               </ul>
             </li>
@@ -72,7 +72,7 @@
                 <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Shablon Sahifasi 4</a></li>
               </ul>
             </li>
-            <li class="scroll-to-section"><a th:href="@{/product/admin}">Kashf eting</a></li>
+            <li class="scroll-to-section"><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Kashf eting</a></li>
 <!--            <li class="fa fa-shopping-cart"><a th:href="@{/client/cart}"></a></li>-->
           </ul>
           <a class='menu-trigger'>
@@ -120,11 +120,11 @@
           <div class="thumb">
             <div class="hover-content">
               <ul>
-                <li><a th:href="@{/user/single_product/{id}(id=${product_kids.id})}"><i class="fa fa-eye"></i></a></li>
+                <li><a th:href="@{/user/{userId}/single_product/{id}(id=${product_kids.id}, userId=${userId})}"><i class="fa fa-eye"></i></a></li>
 <!--                <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>-->
               </ul>
             </div>
-            <img style="" th:src="@{'/product/'+${product_kids.id}}"
+            <img style="" th:src="@{/user/{userId}/{productsId}(userId=${userId}, productsId=${product_kids.id})}"
                  th:alt="${product_kids.name}" alt="Rasm">
           </div>
           <div class="down-content">

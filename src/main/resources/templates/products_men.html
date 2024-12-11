@@ -58,13 +58,13 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.html" class="active">Asosiy</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_women/2}">Ayollar</a></li>
-                        <li class="scroll-to-section"><a th:href="@{/user/product_kids/3}">Bolalar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_women/2(userId=${userId})}">Ayollar</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/user/{userId}/product_kids/3(userId=${userId})}">Bolalar</a></li>
                         <li class="submenu">
                             <a href="javascript:;">Sahifalar</a>
                             <ul>
                                 <li><a href="about.html">Biz haqimizda</a></li>
-                                <li><a th:href="@{/user/products}">Mahsulotlar</a></li>
+                                <li><a th:href="@{/user/{userId}/products(userId=${userId})}">Mahsulotlar</a></li>
                                 <li><a href="single-product.html">Yagona Mahsulot</a></li>
                                 <li><a href="contact.html">Aloqa</a></li>
                             </ul>
@@ -78,8 +78,8 @@
                                 <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Shablon Sahifasi 4</a></li>
                             </ul>
                         </li>
-                        <li class="scroll-to-section"><a th:href="@{/product/admin}">Kashf etish</a></li>
-                        <li class="fa fa-shopping-cart"><a th:href="@{/user/cart}"></a></li>
+                        <li class="scroll-to-section"><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Kashf etish</a></li>
+                        <li class="fa fa-shopping-cart"><a th:href="@{/user/{userId}/cart(userId=${userId})}"></a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menyu</span>
@@ -128,12 +128,12 @@
                     <div class="thumb">
                         <div class="hover-content">
                             <ul>
-                                <li><a th:href="@{/client/single_product/{id}(id=${product_men.id})}"><i class="fa fa-eye"></i></a></li>
+                                <li><a th:href="@{/user/{userId}/single_product/{id}(id=${product_men.id}, userId=${userId})}"><i class="fa fa-eye"></i></a></li>
 <!--                                <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>-->
 <!--                                <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>-->
                             </ul>
                         </div>
-                        <img style="height: 300px;width: 300px" th:src="@{'/product/' + ${product_men.id}}"
+                        <img style="height: 300px;width: 300px" th:src="@{/user/{userId}/{productsId}(userId=${userId}, productsId=${product_men.id})}"
                              th:alt="${product_men.name}" alt="rasm">
                     </div>
                     <div class="down-content">

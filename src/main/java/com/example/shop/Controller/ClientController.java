@@ -9,6 +9,8 @@ import com.example.shop.Services.ClientService;
 import com.example.shop.Services.ProdService;
 import com.example.shop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user/{userId}")
-public class ClientController{
+public class ClientController extends GlobalController{
 
     @Autowired
     private ClientService clientService;
@@ -66,7 +68,16 @@ public class ClientController{
     }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<byte[]> getImageByProductId(@PathVariable long id){
+        Products product = prodService.getProductById(id);
+        byte[] image = product.getImage();
 
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/*")
+                .body(image);
+
+    }
 
 
 }

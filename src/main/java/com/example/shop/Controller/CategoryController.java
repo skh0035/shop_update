@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/{userId}")
-public class CategoryController {
+public class CategoryController extends GlobalController{
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -28,7 +28,7 @@ public class CategoryController {
     @PostMapping("/saveCategory")
     public String saveCategory(Category category) {
         categoryRepository.save(category);
-        return "redirect:/addCategory";
+        return "redirect:/admin/{userId}/addCategory";
     }
 
     @GetMapping("/getCategory")

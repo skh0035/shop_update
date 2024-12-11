@@ -178,7 +178,7 @@
 <nav>
     <h2><a th:href="@{/admin/{userId}/admin(userId=${userId})}">Admin Dashboard</a></h2>
     <ul>
-        <li><a th:href="@{/user/{userId}/product_page(userId=${userId})}">Products</a></li>
+        <li><a th:href="@{/admin/{userId}/product_page(userId=${userId})}">Products</a></li>
         <li><a href="#sales">Sales</a></li>
         <li><a href="#orders">Orders</a></li>
         <li><a th:href="@{/user/{userId}/products(userId=${userId})}">User Products</a></li>
@@ -229,7 +229,7 @@
                                  th:alt="${product.name}" alt="Image">
                         </td>
                         <td>
-                            <form th:action="@{/admin/{userId}/delete/{id}(id=${product.id}, userId=${userId})}" method="post">
+                            <form th:action="@{/admin/{userId}/deleteProdById/{id}(id=${product.id}, userId=${userId})}" method="POST">
                                 <button type="submit" style="background-color: #dc3545; color: white;">Delete</button>
                             </form>
                             <form th:action="@{/admin/{userId}/edit/{id}(id=${product.id}, userId=${userId})}" method="get">

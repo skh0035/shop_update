@@ -50,7 +50,7 @@ public class ProductController extends GlobalController{
         pr.setCategory(category);
         pr.setImageType(image.getContentType());
         prodService.saveAllProd(pr, image);
-        return "redirect:/product/add";
+        return "redirect:/admin{userId}/add";
     }
     @GetMapping("/product_page")
     public String showProducts( Model model) {
@@ -74,10 +74,10 @@ public class ProductController extends GlobalController{
 
     }
 
-    @GetMapping("/deleteProd/{id}")
+    @PostMapping("/deleteProdById/{id}")
     public String deleteByProdId(@PathVariable Long id){
         prodService.deleteByProdId(id);
-        return "redirect:/product/product_page";
+        return "redirect:/admin/{userId}/product_page";
     }
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -92,7 +92,7 @@ public class ProductController extends GlobalController{
             @ModelAttribute Products product,
             RedirectAttributes redirectAttributes) {
         prodService.updateProduct(id, product);
-        return "redirect:/product/product_page";
+        return "redirect:/admin/{userId}/product_page";
     }
 
     @GetMapping("/sortBy")
