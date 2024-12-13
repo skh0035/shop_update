@@ -9,6 +9,7 @@ import com.example.shop.Services.ProdService;
 import com.example.shop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,9 @@ public class CartController extends GlobalController{
     ProdService prodService;
 
     @GetMapping("/cart")
-    public String viewCart(Model model) {
-
-        model.addAttribute("cart", cartService.getCartItems());
+    public String viewCart(Model model, @AuthenticationPrincipal UserDetailsConfiguration userDetails) {
+        Long userId = userDetails.getUserId();
+        model.addAttribute("cart", cartService.getCartItemsByUserId(userId));
         return "Cart";
     }
 

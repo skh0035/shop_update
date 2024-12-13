@@ -213,11 +213,11 @@
             <label for="image" class="custom-file-upload">Choose Image</label>
             <input type="file" name="image" id="image" th:field="*{image}" required onchange="updateFileName()"/>
             <span id="file-chosen">No file chosen</span>
+            <label for="desc">Description</label>
+            <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Description" required></textarea>
 
-            <button type="submit">Save</button>
+             <button type="submit">Save</button>
         </form>
-    <label for="desc">Description</label>
-    <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Description" required></textarea>
 
         <script>
             function updateFileName() {

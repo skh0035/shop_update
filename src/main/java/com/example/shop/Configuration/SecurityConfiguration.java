@@ -58,6 +58,11 @@ public class SecurityConfiguration {
                         .maxSessionsPreventsLogin(true)
                         .expiredUrl("/enter/login"));
 
+        http.logout(logout -> logout
+        .logoutUrl("/logout")
+                .logoutSuccessUrl("/user/login")
+                .invalidateHttpSession(true)
+        );
 
         return http.build();
     }

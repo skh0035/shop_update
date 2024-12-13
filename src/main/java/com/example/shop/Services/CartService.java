@@ -39,6 +39,9 @@ public class CartService {
             cartRepository.save(cart);
         }
     }
+    public List<Cart> getCartItemsByUserId(Long userId) {
+        return cartRepository.findByUserId(userId);
+    }
 
     public List<Cart> getCartItems() {
         return cartRepository.findAll();
